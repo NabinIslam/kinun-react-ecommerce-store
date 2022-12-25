@@ -5,6 +5,8 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import { useParams } from 'react-router-dom';
 import { HiShoppingCart } from 'react-icons/hi';
 import { CartContext } from '../contexts/CartProvider';
+import ProductDescription from '../components/ProductDescription';
+import ProductReviews from '../components/ProductReviews';
 
 const ProductDetails = () => {
   const { addToCart } = useContext(CartContext);
@@ -31,7 +33,8 @@ const ProductDetails = () => {
     return <LoadingSpinner />;
   }
 
-  const { id, image, title, price, category, description } = productDetail;
+  const { id, image, title, price, category, description, rating } =
+    productDetail;
 
   return (
     <div>
@@ -62,15 +65,8 @@ const ProductDetails = () => {
           </Button>
         </div>
       </div>
-      <div className="bg-[#F2F4F8] px-4 md:px-0">
-        <div className="container mx-auto py-5">
-          <div className="bg-white p-5 w-full lg:w-1/2 rounded-lg shadow">
-            <h4 className="font-semibold text-xl mb-5">Description</h4>
-            <h4 className="font-bold text-xl mb-2">{title}</h4>
-            <p>{description}</p>
-          </div>
-        </div>
-      </div>
+      <ProductDescription title={title} description={description} />
+      <ProductReviews rating={rating} />
     </div>
   );
 };

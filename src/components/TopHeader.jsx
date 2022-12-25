@@ -36,6 +36,11 @@ const TopHeader = () => {
             </p>
           </a>
         </div>
+        <div>
+          <marquee behavior="" direction="">
+            This site is under development
+          </marquee>
+        </div>
         <div className="flex items-center gap-2">
           {user ? (
             <Link className="text-sm" onClick={handleLogout}>
