@@ -38,7 +38,7 @@ const Login = () => {
 
   return (
     <div className="h-screen">
-      <div className="container mx-auto py-20">
+      <div className="container mx-auto py-20 px-4 lg:px-0">
         <h2 className="font-bold text-center text-4xl mb-10 text-transparent bg-clip-text bg-gradient-to-r from-purple-700 to-blue-500 pb-1">
           Login
         </h2>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Banner from '../components/Banner';
+import FeaturedCategory from '../components/FeaturedCategory';
 import Hero from '../components/Hero';
 
 const Home = () => {
@@ -7,6 +8,7 @@ const Home = () => {
     <div>
       {/* <Banner /> */}
       <Hero />
+      <FeaturedCategory />
     </div>
   );
 };

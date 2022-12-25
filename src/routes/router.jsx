@@ -42,11 +42,11 @@ const router = createBrowserRouter([
             element: <Jewelery />,
           },
           {
-            path: '/products/mens-clothing',
+            path: "/products/men's clothing",
             element: <MensClothing />,
           },
           {
-            path: '/products/womens-clothing',
+            path: "/products/women's clothing",
             element: <WomensClothing />,
           },
         ],

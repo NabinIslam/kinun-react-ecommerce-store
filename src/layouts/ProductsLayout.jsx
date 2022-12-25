@@ -46,7 +46,7 @@ const ProductsLayout = () => {
                   ? 'bg-slate-200 px-3 py-2 block'
                   : 'hover:bg-slate-200 px-3 py-2 block'
               }
-              to="/products/mens-clothing"
+              to="/products/men's clothing"
             >
               Mens's Clothing
             </NavLink>
@@ -56,7 +56,7 @@ const ProductsLayout = () => {
                   ? 'bg-slate-200 px-3 py-2 block'
                   : 'hover:bg-slate-200 px-3 py-2 block'
               }
-              to="/products/womens-clothing"
+              to="/products/women's clothing"
             >
               Women's Clothing
             </NavLink>
