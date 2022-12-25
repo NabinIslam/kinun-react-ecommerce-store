@@ -2,7 +2,6 @@ import { Button } from 'flowbite-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import heroImg from '../assets/hero-img.jpg';
-import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 const Hero = () => {
@@ -24,7 +23,7 @@ const Hero = () => {
           </p>
           <Link to="/products/all">
             <Button
-              className="mx-auto md:m-0"
+              className="mx-auto md:m-0 shadow"
               gradientDuoTone="purpleToBlue"
               data-aos="zoom-in"
             >
@@ -33,7 +32,12 @@ const Hero = () => {
           </Link>
         </div>
         <div className="">
-          <img className="rounded-lg" src={heroImg} alt="" data-aos="zoom-in" />
+          <img
+            className="rounded-xl border shadow-lg"
+            src={heroImg}
+            alt=""
+            data-aos="zoom-in"
+          />
         </div>
       </div>
     </div>

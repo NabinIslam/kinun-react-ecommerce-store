@@ -13,7 +13,7 @@ const FeaturedCategory = () => {
 
   return (
     <div>
-      <div className="container mx-auto py-10">
+      <div className="container mx-auto py-10 px-4 lg:px-0">
         <h2 className="text-center font-bold text-3xl mb-2">
           Featured Category
         </h2>
