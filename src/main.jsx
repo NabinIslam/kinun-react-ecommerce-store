@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
 import AuthProvider from './contexts/AuthProvider';
 import CartProvider from './contexts/CartProvider';
+import ScrollToTop from 'react-scroll-to-top';
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             }}
           />
           <App />
+          <ScrollToTop
+            className="flex items-center justify-center border"
+            smooth
+          />
         </AuthProvider>
       </CartProvider>
     </QueryClientProvider>
