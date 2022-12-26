@@ -36,9 +36,9 @@ const TopHeader = () => {
             </p>
           </a>
         </div>
-        <div>
-          <marquee behavior="" direction="">
-            This site is under development
+        <div className="m-0 p-0">
+          <marquee className="m-0 p-0" behavior="" direction="">
+            This website is under development
           </marquee>
         </div>
         <div className="flex items-center gap-2">
