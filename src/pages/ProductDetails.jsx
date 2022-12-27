@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { useParams } from 'react-router-dom';
-import { HiShoppingCart } from 'react-icons/hi';
+import { BsCartPlus } from 'react-icons/bs';
 import { CartContext } from '../contexts/CartProvider';
 import ProductDescription from '../components/ProductDescription';
 import ProductReviews from '../components/ProductReviews';
@@ -57,11 +57,19 @@ const ProductDetails = () => {
             size="xs"
             className="mt-3"
             onClick={() =>
-              addToCart(id, image, title, price, category, description)
+              addToCart(
+                id,
+                image,
+                title,
+                price,
+                category,
+                description,
+                productDetail
+              )
             }
           >
-            <HiShoppingCart className="mr-2 h-5 w-5" />
-            Buy now
+            <BsCartPlus className="mr-2 h-5 w-5" />
+            Add to cart
           </Button>
         </div>
       </div>

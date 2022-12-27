@@ -1,6 +1,6 @@
 import { Button } from 'flowbite-react';
 import React, { useContext } from 'react';
-import { HiShoppingCart } from 'react-icons/hi';
+import { CgDetailsMore } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../contexts/CartProvider';
 
@@ -8,7 +8,7 @@ const ProductCard = ({ product }) => {
   const { cartCount, setCartCount } = useContext(CartContext);
 
   const { id, title, price, category, description, image } = product;
-  
+
   return (
     <div
       className="shadow bg-white p-4 rounded-lg flex flex-col justify-between hover:scale-95 ease-in duration-75"
@@ -30,15 +30,17 @@ const ProductCard = ({ product }) => {
         <div className="h-[1px] bg-slate-200 mt-3"></div>
         <h3 className="text-center font-bold text-xl mt-3">${price}</h3>
 
-        <Button
-          gradientDuoTone="purpleToBlue"
-          size="xs"
-          className="mx-auto mt-3"
-          onClick={() => setCartCount(cartCount + 1)}
-        >
-          <HiShoppingCart className="mr-2 h-5 w-5" />
-          Buy now
-        </Button>
+        <Link to={`/products/${id}`}>
+          <Button
+            gradientDuoTone="purpleToBlue"
+            size="xs"
+            className="mx-auto mt-3"
+            onClick={() => setCartCount(cartCount + 1)}
+          >
+            <CgDetailsMore className="mr-2 h-5 w-5" />
+            Details
+          </Button>
+        </Link>
       </div>
     </div>
   );

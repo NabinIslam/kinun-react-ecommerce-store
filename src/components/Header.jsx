@@ -28,7 +28,7 @@ const Header = () => {
               inline={true}
               label={
                 <Avatar
-                  alt="User settings"
+                  alt={user?.displayName}
                   img={
                     user
                       ? user.photoURL
