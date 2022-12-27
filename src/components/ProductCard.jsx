@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 import { CartContext } from '../contexts/CartProvider';
 
 const ProductCard = ({ product }) => {
-  const { cartCount, setCartCount } = useContext(CartContext);
-
   const { id, title, price, category, description, image } = product;
 
   return (
@@ -35,7 +33,6 @@ const ProductCard = ({ product }) => {
             gradientDuoTone="purpleToBlue"
             size="xs"
             className="mx-auto mt-3"
-            onClick={() => setCartCount(cartCount + 1)}
           >
             <CgDetailsMore className="mr-2 h-5 w-5" />
             Details

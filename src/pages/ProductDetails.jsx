@@ -9,7 +9,7 @@ import ProductDescription from '../components/ProductDescription';
 import ProductReviews from '../components/ProductReviews';
 
 const ProductDetails = () => {
-  const { addToCart } = useContext(CartContext);
+  const { addToCart, cartCount, setCartCount } = useContext(CartContext);
 
   const { productId } = useParams();
 
@@ -56,7 +56,7 @@ const ProductDetails = () => {
             color="purple"
             size="xs"
             className="mt-3"
-            onClick={() =>
+            onClick={() => {
               addToCart(
                 id,
                 image,
@@ -65,8 +65,10 @@ const ProductDetails = () => {
                 category,
                 description,
                 productDetail
-              )
-            }
+              );
+              setCartCount(cartCount + 1);
+            }}
+            disabled={cartCount > 0 ? true : false}
           >
             <BsCartPlus className="mr-2 h-5 w-5" />
             Add to cart
