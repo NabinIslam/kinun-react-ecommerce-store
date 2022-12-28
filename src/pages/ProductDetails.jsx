@@ -68,7 +68,6 @@ const ProductDetails = () => {
               );
               setCartCount(cartCount + 1);
             }}
-            disabled={cartCount > 0 ? true : false}
           >
             <BsCartPlus className="mr-2 h-5 w-5" />
             Add to cart

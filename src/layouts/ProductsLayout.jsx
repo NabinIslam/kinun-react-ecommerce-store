@@ -1,7 +1,16 @@
 import React from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
 const ProductsLayout = () => {
+  const { data: categories = [] } = useQuery({
+    queryKey: 'categories',
+    queryFn: () =>
+      fetch('https://fakestoreapi.com/products/categories').then(res =>
+        res.json()
+      ),
+  });
+
   return (
     <div className="bg-[#F2F4F8]">
       <div className="container mx-auto flex flex-col lg:flex-row gap-4">
@@ -20,46 +29,21 @@ const ProductsLayout = () => {
             >
               All Products
             </NavLink>
-            <NavLink
-              className={({ isActive }) =>
-                isActive
-                  ? 'bg-slate-200 px-3 py-2 block'
-                  : 'hover:bg-slate-200 px-3 py-2 block'
-              }
-              to="/products/electronics"
-            >
-              Electronics
-            </NavLink>
-            <NavLink
-              className={({ isActive }) =>
-                isActive
-                  ? 'bg-slate-200 px-3 py-2 block'
-                  : 'hover:bg-slate-200 px-3 py-2 block'
-              }
-              to="/products/jewelery"
-            >
-              Jewelery
-            </NavLink>
-            <NavLink
-              className={({ isActive }) =>
-                isActive
-                  ? 'bg-slate-200 px-3 py-2 block'
-                  : 'hover:bg-slate-200 px-3 py-2 block'
-              }
-              to="/products/men's clothing"
-            >
-              Mens's Clothing
-            </NavLink>
-            <NavLink
-              className={({ isActive }) =>
-                isActive
-                  ? 'bg-slate-200 px-3 py-2 block'
-                  : 'hover:bg-slate-200 px-3 py-2 block'
-              }
-              to="/products/women's clothing"
-            >
-              Women's Clothing
-            </NavLink>
+
+            {categories.map((category, index) => (
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? 'bg-slate-200 px-3 py-2 block'
+                    : 'hover:bg-slate-200 px-3 py-2 block'
+                }
+                to={`/products/${category}`}
+                key={index}
+              >
+                {category.charAt(0).toUpperCase() +
+                  category.slice(1).toLowerCase()}
+              </NavLink>
+            ))}
           </div>
         </div>
         <div className="basis-full p-4">
