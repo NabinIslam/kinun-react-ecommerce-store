@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { CartContext } from '../contexts/CartProvider';
+import { Link } from 'react-router-dom';
 
 const CartPage = () => {
   const { cart } = useContext(CartContext);
@@ -20,11 +21,15 @@ const CartPage = () => {
             <Table.HeadCell>Action</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
-            {cart.map(({ image, title, price, category }) => (
+            {cart.map(({ id, image, title, price, category }) => (
               <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white flex items-center gap-2">
                   <img src={image} width={50} height={50} alt="" />{' '}
-                  <span>{title}</span>
+                  <span>
+                    <Link className="hover:underline" to={`/products/${id}`}>
+                      {title}
+                    </Link>
+                  </span>
                 </Table.Cell>
                 <Table.Cell>${price}</Table.Cell>
                 <Table.Cell>
