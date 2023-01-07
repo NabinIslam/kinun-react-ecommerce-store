@@ -20,7 +20,7 @@ const ProductDetails = () => {
   } = useQuery({
     queryKey: ['productDetail'],
     queryFn: () =>
-      fetch(`http://localhost:5000/products/${productId}`).then(res =>
+      fetch(`https://kinun-server.vercel.app/products/${productId}`).then(res =>
         res.json()
       ),
   });

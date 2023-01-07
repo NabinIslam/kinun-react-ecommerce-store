@@ -14,9 +14,9 @@ const Electronics = () => {
   } = useQuery({
     queryKey: ['products'],
     queryFn: () =>
-      fetch('http://localhost:5000/products/category/electronics').then(res =>
-        res.json()
-      ),
+      fetch(
+        'https://kinun-server.vercel.app/products/category/electronics'
+      ).then(res => res.json()),
   });
 
   if (isFetching) {

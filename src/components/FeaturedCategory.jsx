@@ -6,7 +6,9 @@ const FeaturedCategory = () => {
   const { data: categories = [] } = useQuery({
     queryKey: 'categories',
     queryFn: () =>
-      fetch('http://localhost:5000/categories').then(res => res.json()),
+      fetch('https://kinun-server.vercel.app/categories').then(res =>
+        res.json()
+      ),
   });
 
   return (
