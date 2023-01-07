@@ -14,8 +14,8 @@ const Electronics = () => {
   } = useQuery({
     queryKey: ['products'],
     queryFn: () =>
-      fetch('https://fakestoreapi.com/products/category/electronics').then(
-        res => res.json()
+      fetch('http://localhost:5000/products/category/electronics').then(res =>
+        res.json()
       ),
   });
 

@@ -20,7 +20,7 @@ const ProductDetails = () => {
   } = useQuery({
     queryKey: ['productDetail'],
     queryFn: () =>
-      fetch(`https://fakestoreapi.com/products/${productId}`).then(res =>
+      fetch(`http://localhost:5000/products/${productId}`).then(res =>
         res.json()
       ),
   });
@@ -33,7 +33,7 @@ const ProductDetails = () => {
     return <LoadingSpinner />;
   }
 
-  const { id, image, title, price, category, description, rating } =
+  const { _id, image, title, price, category, description, rating } =
     productDetail;
 
   return (
@@ -58,7 +58,6 @@ const ProductDetails = () => {
             className="mt-3"
             onClick={() => {
               addToCart(
-                id,
                 image,
                 title,
                 price,

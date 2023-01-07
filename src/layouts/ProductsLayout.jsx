@@ -6,9 +6,7 @@ const ProductsLayout = () => {
   const { data: categories = [] } = useQuery({
     queryKey: 'categories',
     queryFn: () =>
-      fetch('https://fakestoreapi.com/products/categories').then(res =>
-        res.json()
-      ),
+      fetch('http://localhost:5000/categories').then(res => res.json()),
   });
 
   return (
@@ -30,18 +28,18 @@ const ProductsLayout = () => {
               All Products
             </NavLink>
 
-            {categories.map((category, index) => (
+            {categories.map(category => (
               <NavLink
                 className={({ isActive }) =>
                   isActive
                     ? 'bg-slate-200 px-3 py-2 block'
                     : 'hover:bg-slate-200 px-3 py-2 block'
                 }
-                to={`/products/${category}`}
-                key={index}
+                to={`/products/${category.name}`}
+                key={category._id}
               >
-                {category.charAt(0).toUpperCase() +
-                  category.slice(1).toLowerCase()}
+                {category.name.charAt(0).toUpperCase() +
+                  category.name.slice(1).toLowerCase()}
               </NavLink>
             ))}
           </div>

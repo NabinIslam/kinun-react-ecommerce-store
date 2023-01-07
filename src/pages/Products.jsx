@@ -14,7 +14,7 @@ const Products = () => {
   } = useQuery({
     queryKey: ['products'],
     queryFn: () =>
-      fetch('https://fakestoreapi.com/products').then(res => res.json()),
+      fetch('http://localhost:5000/products').then(res => res.json()),
   });
 
   if (isFetching) {
@@ -55,7 +55,7 @@ const Products = () => {
           {products
             .sort((a, b) => a.price - b.price)
             .map(product => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard key={product._id} product={product} />
             ))}
         </div>
       </div>
@@ -86,7 +86,7 @@ const Products = () => {
           {products
             .sort((a, b) => b.price - a.price)
             .map(product => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard key={product._id} product={product} />
             ))}
         </div>
       </div>
@@ -115,7 +115,7 @@ const Products = () => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {products.map(product => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product._id} product={product} />
           ))}
         </div>
       </div>
@@ -143,7 +143,7 @@ const Products = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {products.map(product => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product._id} product={product} />
         ))}
       </div>
     </div>

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { CartContext } from '../contexts/CartProvider';
 
 const ProductCard = ({ product }) => {
-  const { id, title, price, category, description, image } = product;
+  const { _id, title, price, category, description, image } = product;
 
   return (
     <div
@@ -13,11 +13,11 @@ const ProductCard = ({ product }) => {
       data-aos="zoom-in"
     >
       <div>
-        <Link to={`/products/${id}`}>
+        <Link to={`/products/${_id}`}>
           <img className="h-64 mx-auto" src={image} alt="" />
         </Link>
 
-        <Link to={`/products/${id}`}>
+        <Link to={`/products/${_id}`}>
           <h4 className="mt-3 font-semibold text-lg hover:underline">
             {title}
           </h4>
@@ -28,7 +28,7 @@ const ProductCard = ({ product }) => {
         <div className="h-[1px] bg-slate-200 mt-3"></div>
         <h3 className="text-center font-bold text-xl mt-3">${price}</h3>
 
-        <Link to={`/products/${id}`}>
+        <Link to={`/products/${_id}`}>
           <Button
             gradientDuoTone="purpleToBlue"
             size="xs"

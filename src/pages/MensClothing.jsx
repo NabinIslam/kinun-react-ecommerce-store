@@ -57,7 +57,7 @@ const MensClothing = () => {
           {products
             .sort((a, b) => a.price - b.price)
             .map(product => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard key={product._id} product={product} />
             ))}
         </div>
       </div>
@@ -88,7 +88,7 @@ const MensClothing = () => {
           {products
             .sort((a, b) => b.price - a.price)
             .map(product => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard key={product._id} product={product} />
             ))}
         </div>
       </div>
@@ -117,7 +117,7 @@ const MensClothing = () => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {products.map(product => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product._id} product={product} />
           ))}
         </div>
       </div>
@@ -145,7 +145,7 @@ const MensClothing = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {products.map(product => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product._id} product={product} />
         ))}
       </div>
     </div>
