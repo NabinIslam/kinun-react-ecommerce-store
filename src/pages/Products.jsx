@@ -1,10 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ProductCard from '../components/ProductCard';
+import { actionTypes } from '../state/product-state/actionTypes';
+import {
+  initialState,
+  productReducer,
+} from '../state/product-state/ProductReducer';
 
 const Products = () => {
-  const [sortValue, setSortValue] = useState('');
+  const [state, dispatch] = useReducer(productReducer, initialState);
+
+  console.log(state);
 
   const {
     data: products = [],
@@ -17,6 +24,8 @@ const Products = () => {
       fetch('https://kinun-server.vercel.app/products').then(res => res.json()),
   });
 
+  let content;
+
   if (isFetching) {
     return <LoadingSpinner />;
   }
@@ -25,101 +34,22 @@ const Products = () => {
     return <LoadingSpinner />;
   }
 
-  const handleSort = async event => {
-    const value = event.target.value;
-    setSortValue(value);
-    refetch();
-  };
-
-  if (sortValue === 'Price (Low to High)') {
-    return (
-      <div>
-        <div className="bg-white px-2 mb-2 flex items-center justify-between rounded-lg shadow">
-          <h2 className="text-lg font-bold">Products</h2>
-          <div className="flex items-center">
-            <p className="font-bold">Sort By: </p>
-            <form action="">
-              <select
-                className="border-none pr-8"
-                onChange={handleSort}
-                value={sortValue}
-              >
-                <option>Default</option>
-                <option>Price (Low to High)</option>
-                <option>Price (Hign to Low)</option>
-              </select>
-            </form>
-          </div>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {products
-            .sort((a, b) => a.price - b.price)
-            .map(product => (
-              <ProductCard key={product._id} product={product} />
-            ))}
-        </div>
-      </div>
-    );
+  if (state.default && state.lowToHigh === false && state.highToLow === false) {
+    content = products.map(product => (
+      <ProductCard key={product._id} product={product} />
+    ));
   }
 
-  if (sortValue === 'Price (Hign to Low)') {
-    return (
-      <div>
-        <div className="bg-white px-2 mb-2 flex items-center justify-between rounded-lg shadow">
-          <h2 className="text-lg font-bold">Products</h2>
-          <div className="flex items-center">
-            <p className="font-bold">Sort By: </p>
-            <form action="">
-              <select
-                className="border-none pr-8"
-                onChange={handleSort}
-                value={sortValue}
-              >
-                <option>Default</option>
-                <option>Price (Low to High)</option>
-                <option>Price (Hign to Low)</option>
-              </select>
-            </form>
-          </div>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {products
-            .sort((a, b) => b.price - a.price)
-            .map(product => (
-              <ProductCard key={product._id} product={product} />
-            ))}
-        </div>
-      </div>
-    );
+  if (state.default === false && state.lowToHigh && state.highToLow === false) {
+    content = products
+      .sort((a, b) => a.price - b.price)
+      .map(product => <ProductCard key={product.id} product={product} />);
   }
 
-  if (sortValue === 'Default') {
-    return (
-      <div>
-        <div className="bg-white px-2 mb-2 flex items-center justify-between rounded-lg shadow">
-          <h2 className="text-lg font-bold">Products</h2>
-          <div className="flex items-center">
-            <p className="font-bold">Sort By: </p>
-            <form action="">
-              <select
-                className="border-none pr-8"
-                onChange={handleSort}
-                value={sortValue}
-              >
-                <option>Default</option>
-                <option>Price (Low to High)</option>
-                <option>Price (Hign to Low)</option>
-              </select>
-            </form>
-          </div>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {products.map(product => (
-            <ProductCard key={product._id} product={product} />
-          ))}
-        </div>
-      </div>
-    );
+  if (state.default === false && state.lowToHigh === false && state.highToLow) {
+    content = products
+      .sort((a, b) => b.price - a.price)
+      .map(product => <ProductCard key={product.id} product={product} />);
   }
 
   return (
@@ -129,24 +59,29 @@ const Products = () => {
         <div className="flex items-center">
           <p className="font-bold">Sort By: </p>
           <form action="">
-            <select
-              className="border-none pr-8"
-              onChange={handleSort}
-              value={sortValue}
-            >
-              <option>Default</option>
-              <option>Price (Low to High)</option>
-              <option>Price (Hign to Low)</option>
+            <select className="border-none pr-8">
+              <option onChange={() => dispatch({ type: actionTypes.DEFAULT })}>
+                Default
+              </option>
+              <option
+                onChange={() => dispatch({ type: actionTypes.LOW_TO_HIGH })}
+              >
+                Price (Low to High)
+              </option>
+              <option
+                onChange={() => dispatch({ type: actionTypes.HIGH_TO_LOW })}
+              >
+                Price (Hign to Low)
+              </option>
             </select>
           </form>
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-        {products.map(product => (
-          <ProductCard key={product._id} product={product} />
-        ))}
+        {content}
       </div>
     </div>
   );
 };
+
 export default Products;

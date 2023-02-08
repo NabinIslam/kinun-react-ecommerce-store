@@ -2,7 +2,7 @@ import { Button } from 'flowbite-react';
 import React, { useContext } from 'react';
 import { CgDetailsMore } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
-import { CartContext } from '../contexts/CartProvider';
+// import { CartContext } from '../contexts/CartProvider';
 
 const ProductCard = ({ product }) => {
   const { _id, title, price, category, description, image } = product;

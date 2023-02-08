@@ -3,12 +3,9 @@ import React, { useContext } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
-import { CartContext } from '../contexts/CartProvider';
 
 const Header = () => {
   const { user } = useContext(AuthContext);
-
-  const { cartCount } = useContext(CartContext);
 
   return (
     <nav className="shadow sticky top-0 z-50 bg-white">
@@ -54,7 +51,7 @@ const Header = () => {
             </Dropdown>
             <Link className="flex items-center gap-1" to="/cart">
               <AiOutlineShoppingCart className="text-2xl" />
-              <p>{cartCount}</p>
+              <p></p>
             </Link>
             <Navbar.Toggle className="ml-2" />
           </div>

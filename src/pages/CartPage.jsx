@@ -2,16 +2,13 @@ import { Button, Table } from 'flowbite-react';
 import React, { useContext } from 'react';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
-import { CartContext } from '../contexts/CartProvider';
 import { Link } from 'react-router-dom';
 
 const CartPage = () => {
-  const { cart } = useContext(CartContext);
-
   return (
     <div>
       <div className="container mx-auto py-10">
-        <Table className="border" hoverable={true}>
+        {/* <Table className="border" hoverable={true}>
           <Table.Head>
             <Table.HeadCell>Product</Table.HeadCell>
             <Table.HeadCell>Price</Table.HeadCell>
@@ -50,7 +47,7 @@ const CartPage = () => {
               </Table.Row>
             ))}
           </Table.Body>
-        </Table>
+        </Table> */}
       </div>
     </div>
   );

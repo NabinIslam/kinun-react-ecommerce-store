@@ -4,13 +4,10 @@ import React, { useContext } from 'react';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { useParams } from 'react-router-dom';
 import { BsCartPlus } from 'react-icons/bs';
-import { CartContext } from '../contexts/CartProvider';
 import ProductDescription from '../components/ProductDescription';
 import ProductReviews from '../components/ProductReviews';
 
 const ProductDetails = () => {
-  const { addToCart, cartCount, setCartCount } = useContext(CartContext);
-
   const { productId } = useParams();
 
   const {
