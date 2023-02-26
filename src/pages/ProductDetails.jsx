@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom';
 import { BsCartPlus } from 'react-icons/bs';
 import ProductDescription from '../components/ProductDescription';
 import ProductReviews from '../components/ProductReviews';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../features/cart/cartSlice';
 
 const ProductDetails = () => {
   const { productId } = useParams();
@@ -22,9 +24,7 @@ const ProductDetails = () => {
       ),
   });
 
-  if (isFetching) {
-    return <LoadingSpinner />;
-  }
+  const dispatch = useDispatch();
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -53,17 +53,7 @@ const ProductDetails = () => {
             color="purple"
             size="xs"
             className="mt-3"
-            onClick={() => {
-              addToCart(
-                image,
-                title,
-                price,
-                category,
-                description,
-                productDetail
-              );
-              setCartCount(cartCount + 1);
-            }}
+            onClick={() => dispatch(addToCart(productDetail))}
           >
             <BsCartPlus className="mr-2 h-5 w-5" />
             Add to cart

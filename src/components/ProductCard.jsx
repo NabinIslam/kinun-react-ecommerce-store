@@ -2,10 +2,13 @@ import { Button } from 'flowbite-react';
 import React, { useContext } from 'react';
 import { CgDetailsMore } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
-// import { CartContext } from '../contexts/CartProvider';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../features/cart/cartSlice';
 
 const ProductCard = ({ product }) => {
   const { _id, title, price, category, description, image } = product;
+
+  const dispatch = useDispatch();
 
   return (
     <div
@@ -28,16 +31,15 @@ const ProductCard = ({ product }) => {
         <div className="h-[1px] bg-slate-200 mt-3"></div>
         <h3 className="text-center font-bold text-xl mt-3">${price}</h3>
 
-        <Link to={`/products/${_id}`}>
-          <Button
-            gradientDuoTone="purpleToBlue"
-            size="xs"
-            className="mx-auto mt-3"
-          >
-            <CgDetailsMore className="mr-2 h-5 w-5" />
-            Details
-          </Button>
-        </Link>
+        <Button
+          gradientDuoTone="purpleToBlue"
+          size="xs"
+          className="mx-auto mt-3"
+          onClick={() => dispatch(addToCart(product))}
+        >
+          <CgDetailsMore className="mr-2 h-5 w-5" />
+          Add To Cart
+        </Button>
       </div>
     </div>
   );

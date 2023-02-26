@@ -3,12 +3,18 @@ import React, { useContext } from 'react';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeFromCart } from '../features/cart/cartSlice';
 
 const CartPage = () => {
+  const cart = useSelector(state => state.cart.cart);
+
+  const dispatch = useDispatch();
+
   return (
     <div>
       <div className="container mx-auto py-10">
-        {/* <Table className="border" hoverable={true}>
+        <Table className="border" hoverable={true}>
           <Table.Head>
             <Table.HeadCell>Product</Table.HeadCell>
             <Table.HeadCell>Price</Table.HeadCell>
@@ -18,36 +24,43 @@ const CartPage = () => {
             <Table.HeadCell>Action</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
-            {cart.map(({ id, image, title, price, category }) => (
+            {cart.map(product => (
               <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white flex items-center gap-2">
-                  <img src={image} width={50} height={50} alt="" />{' '}
+                  <img src={product.image} width={50} height={50} alt="" />{' '}
                   <span>
-                    <Link className="hover:underline" to={`/products/${id}`}>
-                      {title}
+                    <Link
+                      className="hover:underline"
+                      to={`/products/${product._id}`}
+                    >
+                      {product.title}
                     </Link>
                   </span>
                 </Table.Cell>
-                <Table.Cell>${price}</Table.Cell>
+                <Table.Cell>${product.price}</Table.Cell>
                 <Table.Cell>
-                  {category.charAt(0).toUpperCase() +
-                    category.slice(1).toLowerCase()}
+                  {product.category.charAt(0).toUpperCase() +
+                    product.category.slice(1).toLowerCase()}
                 </Table.Cell>
                 <Table.Cell>
                   <span className="font-bold flex items-center gap-2">
-                    <AiOutlinePlus />0<AiOutlineMinus />
+                    {product.quantity}
                   </span>
                 </Table.Cell>
-                <Table.Cell>$2999</Table.Cell>
+                <Table.Cell>{product.price}</Table.Cell>
                 <Table.Cell>
-                  <Button color="failure" size="sm">
+                  <Button
+                    color="failure"
+                    size="sm"
+                    onClick={() => dispatch(removeFromCart(product))}
+                  >
                     <BsFillTrashFill />
                   </Button>
                 </Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>
-        </Table> */}
+        </Table>
       </div>
     </div>
   );

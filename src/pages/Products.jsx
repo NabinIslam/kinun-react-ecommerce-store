@@ -2,17 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useReducer } from 'react';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ProductCard from '../components/ProductCard';
-import { actionTypes } from '../state/product-state/actionTypes';
-import {
-  initialState,
-  productReducer,
-} from '../state/product-state/ProductReducer';
 
 const Products = () => {
-  const [state, dispatch] = useReducer(productReducer, initialState);
-
-  console.log(state);
-
   const {
     data: products = [],
     isLoading,
@@ -26,30 +17,8 @@ const Products = () => {
 
   let content;
 
-  if (isFetching) {
-    return <LoadingSpinner />;
-  }
-
   if (isLoading) {
     return <LoadingSpinner />;
-  }
-
-  if (state.default && state.lowToHigh === false && state.highToLow === false) {
-    content = products.map(product => (
-      <ProductCard key={product._id} product={product} />
-    ));
-  }
-
-  if (state.default === false && state.lowToHigh && state.highToLow === false) {
-    content = products
-      .sort((a, b) => a.price - b.price)
-      .map(product => <ProductCard key={product.id} product={product} />);
-  }
-
-  if (state.default === false && state.lowToHigh === false && state.highToLow) {
-    content = products
-      .sort((a, b) => b.price - a.price)
-      .map(product => <ProductCard key={product.id} product={product} />);
   }
 
   return (
@@ -78,7 +47,9 @@ const Products = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-        {content}
+        {products.map(product => (
+          <ProductCard key={product._id} product={product} />
+        ))}
       </div>
     </div>
   );
