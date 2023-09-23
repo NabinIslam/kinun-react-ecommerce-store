@@ -8,7 +8,6 @@ const MensClothing = () => {
 
   const {
     data: products = [],
-    isLoading,
     isFetching,
     refetch,
   } = useQuery({
@@ -19,13 +18,7 @@ const MensClothing = () => {
       ),
   });
 
-  if (isFetching) {
-    return <LoadingSpinner />;
-  }
-
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
+  if (isFetching) return <LoadingSpinner />;
 
   const handleSort = async event => {
     const value = event.target.value;

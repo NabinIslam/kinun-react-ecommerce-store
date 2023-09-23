@@ -6,20 +6,17 @@ import ProductCard from '../components/ProductCard';
 const Products = () => {
   const {
     data: products = [],
-    isLoading,
     isFetching,
     refetch,
   } = useQuery({
     queryKey: ['products'],
     queryFn: () =>
-      fetch('https://kinun-server.vercel.app/products').then(res => res.json()),
+      fetch('https://fakestoreapi.com/products').then(res => res.json()),
   });
 
   let content;
 
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
+  if (isFetching) return <LoadingSpinner />;
 
   return (
     <div>
@@ -40,7 +37,7 @@ const Products = () => {
               <option
                 onChange={() => dispatch({ type: actionTypes.HIGH_TO_LOW })}
               >
-                Price (Hign to Low)
+                Price (High to Low)
               </option>
             </select>
           </form>
@@ -48,7 +45,7 @@ const Products = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {products.map(product => (
-          <ProductCard key={product._id} product={product} />
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
     </div>

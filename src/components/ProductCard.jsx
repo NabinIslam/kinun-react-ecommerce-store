@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../features/cart/cartSlice';
 
 const ProductCard = ({ product }) => {
-  const { _id, title, price, category, description, image } = product;
+  const { id, title, price, category, description, image } = product;
 
   const dispatch = useDispatch();
 
@@ -16,11 +16,11 @@ const ProductCard = ({ product }) => {
       data-aos="zoom-in"
     >
       <div>
-        <Link to={`/products/${_id}`}>
+        <Link to={`/products/${id}`}>
           <img className="h-64 mx-auto" src={image} alt="" />
         </Link>
 
-        <Link to={`/products/${_id}`}>
+        <Link to={`/products/${id}`}>
           <h4 className="mt-3 font-semibold text-lg hover:underline">
             {title}
           </h4>

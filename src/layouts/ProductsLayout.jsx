@@ -6,7 +6,7 @@ const ProductsLayout = () => {
   const { data: categories = [] } = useQuery({
     queryKey: 'categories',
     queryFn: () =>
-      fetch('https://kinun-server.vercel.app/categories').then(res =>
+      fetch('https://fakestoreapi.com/products/categories').then(res =>
         res.json()
       ),
   });
@@ -30,18 +30,18 @@ const ProductsLayout = () => {
               All Products
             </NavLink>
 
-            {categories.map(category => (
+            {categories.map((category, index) => (
               <NavLink
                 className={({ isActive }) =>
                   isActive
                     ? 'bg-slate-200 px-3 py-2 block'
                     : 'hover:bg-slate-200 px-3 py-2 block'
                 }
-                to={`/products/${category.name}`}
-                key={category._id}
+                to={`/products/${category}`}
+                key={index}
               >
-                {category.name.charAt(0).toUpperCase() +
-                  category.name.slice(1).toLowerCase()}
+                {category.charAt(0).toUpperCase() +
+                  category.slice(1).toLowerCase()}
               </NavLink>
             ))}
           </div>

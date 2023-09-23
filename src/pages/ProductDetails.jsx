@@ -12,23 +12,17 @@ import { addToCart } from '../features/cart/cartSlice';
 const ProductDetails = () => {
   const { productId } = useParams();
 
-  const {
-    data: productDetail = [],
-    isLoading,
-    isFetching,
-  } = useQuery({
+  const { data: productDetail = [], isFetching } = useQuery({
     queryKey: ['productDetail'],
     queryFn: () =>
-      fetch(`https://kinun-server.vercel.app/products/${productId}`).then(res =>
+      fetch(`https://fakestoreapi.com/products/${productId}`).then(res =>
         res.json()
       ),
   });
 
   const dispatch = useDispatch();
 
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
+  if (isFetching) return <LoadingSpinner />;
 
   const { _id, image, title, price, category, description, rating } =
     productDetail;

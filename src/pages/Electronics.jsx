@@ -8,24 +8,17 @@ const Electronics = () => {
 
   const {
     data: products = [],
-    isLoading,
     isFetching,
     refetch,
   } = useQuery({
     queryKey: ['products'],
     queryFn: () =>
       fetch(
-        'https://kinun-server.vercel.app/products/category/electronics'
+        'https://fakestoreapi.com/products/category/electronics'
       ).then(res => res.json()),
   });
 
-  if (isFetching) {
-    return <LoadingSpinner />;
-  }
-
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
+  if (isFetching) return <LoadingSpinner />;
 
   const handleSort = async event => {
     const value = event.target.value;
