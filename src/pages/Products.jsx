@@ -6,7 +6,7 @@ import ProductCard from '../components/ProductCard';
 const Products = () => {
   const [lowest, setLowest] = useState(false);
   const [highest, setHighest] = useState(false);
-  const [defaul, setDefault] = useState(false);
+  const [normal, setNormal] = useState(false);
 
   const {
     data: products = [],
@@ -21,9 +21,9 @@ const Products = () => {
   const handleProductFilter = event => {
     event.preventDefault();
 
-    event.target.value === 'lowest' ? setLowest(true) : setHighest(false);
-    event.target.value === 'highest' ? setHighest(true) : setLowest(false);
-    event.target.value === 'default' ? setLowest(false) : setHighest(false);
+    event.target.value === 'lowest' ? setLowest(true) : setLowest(false);
+    event.target.value === 'highest' ? setHighest(true) : setHighest(false);
+    event.target.value === 'normal' ? setNormal(true) : setNormal(false);
   };
 
   let content = products.map(product => (
@@ -31,10 +31,22 @@ const Products = () => {
   ));
 
   lowest
+    ? (content = products
+        .sort((a, b) => a.price - b.price)
+        .map(product => <ProductCard key={product.id} product={product} />))
+    : lowest;
+
+  highest
+    ? (content = products
+        .sort((a, b) => b.price - a.price)
+        .map(product => <ProductCard key={product.id} product={product} />))
+    : highest;
+
+  normal
     ? (content = products.map(product => (
         <ProductCard key={product.id} product={product} />
       )))
-    : lowest;
+    : normal;
 
   if (isFetching) return <LoadingSpinner />;
 
@@ -46,7 +58,7 @@ const Products = () => {
           <p className="font-bold">Sort By: </p>
           <form action="">
             <select className="border-none pr-8" onChange={handleProductFilter}>
-              <option value="default">Default</option>
+              <option value="normal">Default</option>
               <option value="lowest">Price (Low to High)</option>
               <option value="highest">Price (High to Low)</option>
             </select>
