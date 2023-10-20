@@ -1,11 +1,23 @@
 import { Avatar, Dropdown, Navbar } from 'flowbite-react';
 import React, { useContext } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
+import toast from 'react-hot-toast';
 
 const Header = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        navigate('/login');
+        toast.success('Logout successful');
+      })
+      .catch(err => console.error(err));
+  };
 
   return (
     <nav className="shadow sticky top-0 z-50 bg-white">
@@ -47,7 +59,7 @@ const Header = () => {
               <Dropdown.Item>Settings</Dropdown.Item>
               <Dropdown.Item>Earnings</Dropdown.Item>
               <Dropdown.Divider />
-              <Dropdown.Item>Logout</Dropdown.Item>
+              <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
             </Dropdown>
             <Link className="flex items-center gap-1" to="/cart">
               <AiOutlineShoppingCart className="text-2xl" />

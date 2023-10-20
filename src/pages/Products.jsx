@@ -1,9 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ProductCard from '../components/ProductCard';
 
 const Products = () => {
+  const [lowest, setLowest] = useState(false);
+  const [highest, setHighest] = useState(false);
+  const [defaul, setDefault] = useState(false);
+
   const {
     data: products = [],
     isFetching,
@@ -14,7 +18,23 @@ const Products = () => {
       fetch('https://fakestoreapi.com/products').then(res => res.json()),
   });
 
-  let content;
+  const handleProductFilter = event => {
+    event.preventDefault();
+
+    event.target.value === 'lowest' ? setLowest(true) : setHighest(false);
+    event.target.value === 'highest' ? setHighest(true) : setLowest(false);
+    event.target.value === 'default' ? setLowest(false) : setHighest(false);
+  };
+
+  let content = products.map(product => (
+    <ProductCard key={product.id} product={product} />
+  ));
+
+  lowest
+    ? (content = products.map(product => (
+        <ProductCard key={product.id} product={product} />
+      )))
+    : lowest;
 
   if (isFetching) return <LoadingSpinner />;
 
@@ -25,28 +45,16 @@ const Products = () => {
         <div className="flex items-center">
           <p className="font-bold">Sort By: </p>
           <form action="">
-            <select className="border-none pr-8">
-              <option onChange={() => dispatch({ type: actionTypes.DEFAULT })}>
-                Default
-              </option>
-              <option
-                onChange={() => dispatch({ type: actionTypes.LOW_TO_HIGH })}
-              >
-                Price (Low to High)
-              </option>
-              <option
-                onChange={() => dispatch({ type: actionTypes.HIGH_TO_LOW })}
-              >
-                Price (High to Low)
-              </option>
+            <select className="border-none pr-8" onChange={handleProductFilter}>
+              <option value="default">Default</option>
+              <option value="lowest">Price (Low to High)</option>
+              <option value="highest">Price (High to Low)</option>
             </select>
           </form>
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-        {products.map(product => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+        {content}
       </div>
     </div>
   );
