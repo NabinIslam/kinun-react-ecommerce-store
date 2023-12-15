@@ -1,15 +1,23 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import LoadingSpinner from './LoadingSpinner';
 
 const FeaturedCategory = () => {
-  const { data: categories = [] } = useQuery({
+  const {
+    data: categories = [],
+    isFetching,
+    isLoading,
+  } = useQuery({
     queryKey: 'categories',
     queryFn: () =>
       fetch('https://fakestoreapi.com/products/categories').then(res =>
         res.json()
       ),
   });
+
+  // if (isFetching) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <div>
@@ -20,6 +28,7 @@ const FeaturedCategory = () => {
         <p className="text-center font-semibold">
           Select your Desired Product from Featured Category!
         </p>
+
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 max-w-2xl mx-auto gap-5 px-10 lg:px-0">
           {categories.map((category, index) => (
             <Link to={`/products/${category}`} key={index}>

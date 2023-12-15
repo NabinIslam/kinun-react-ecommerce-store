@@ -12,7 +12,7 @@ const ProductCard = ({ product }) => {
 
   return (
     <div
-      className="shadow bg-white p-4 rounded-lg flex flex-col justify-between hover:scale-95 ease-in duration-75"
+      className="shadow bg-white p-4 rounded-lg flex flex-col justify-between hover:scale-95 ease-in duration-75 border"
       data-aos="zoom-in"
     >
       <div>

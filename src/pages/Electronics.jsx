@@ -9,16 +9,18 @@ const Electronics = () => {
   const {
     data: products = [],
     isFetching,
+    isLoading,
     refetch,
   } = useQuery({
     queryKey: ['products'],
     queryFn: () =>
-      fetch(
-        'https://fakestoreapi.com/products/category/electronics'
-      ).then(res => res.json()),
+      fetch('https://fakestoreapi.com/products/category/electronics').then(
+        res => res.json()
+      ),
   });
 
   if (isFetching) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSpinner />;
 
   const handleSort = async event => {
     const value = event.target.value;
