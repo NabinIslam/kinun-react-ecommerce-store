@@ -9,14 +9,14 @@ const FeaturedCategory = () => {
     isFetching,
     isLoading,
   } = useQuery({
-    queryKey: 'categories',
+    queryKey: ['categories'],
     queryFn: () =>
-      fetch('https://fakestoreapi.com/products/categories').then(res =>
+      fetch('https://kinun.onrender.com/api/categories').then(res =>
         res.json()
       ),
   });
 
-  // if (isFetching) return <LoadingSpinner />;
+  if (isFetching) return <LoadingSpinner />;
   if (isLoading) return <LoadingSpinner />;
 
   return (
@@ -29,17 +29,18 @@ const FeaturedCategory = () => {
           Select your Desired Product from Featured Category!
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 max-w-2xl mx-auto gap-5 px-10 lg:px-0">
-          {categories.map((category, index) => (
-            <Link to={`/products/${category}`} key={index}>
-              <div className="py-10 my-5 shadow hover:shadow-2xl rounded-xl border">
-                <p className="font-semibold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-700 to-blue-500">
-                  {category.charAt(0).toUpperCase() +
-                    category.slice(1).toLowerCase()}
-                </p>
-              </div>
-            </Link>
-          ))}
+        <div className="flex justify-center items-center flex-wrap gap-10 ">
+          {categories.categories.map(category => {
+            return (
+              <Link to={`/products/${category.slug}`} key={category._id}>
+                <div className="py-8 px-10 my-5 shadow hover:shadow-2xl rounded-xl border">
+                  <p className="font-semibold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-700 to-blue-500">
+                    {category.name}
+                  </p>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </div>

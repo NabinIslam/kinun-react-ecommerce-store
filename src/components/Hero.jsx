@@ -21,7 +21,7 @@ const Hero = () => {
           <p className="font-normal mb-2 text-2xl" data-aos="zoom-in">
             The leading ecommerce store in the planet.
           </p>
-          <Link to="/products/all">
+          <Link to="/products">
             <Button
               className="mx-auto md:m-0 shadow"
               gradientDuoTone="purpleToBlue"

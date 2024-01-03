@@ -8,10 +8,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 
 const Register = () => {
-  const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
-
+  const { createUser, updateUser, googleSignIn } =
+    useContext(AuthContext);
   const { handleSubmit, register } = useForm();
-
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -23,9 +22,7 @@ const Register = () => {
         updateUser(data.name)
           .then(() => {})
           .catch(err => console.error(err));
-
         navigate(from, { replace: true });
-
         toast.success('Registration successful');
       })
       .catch(err => console.error(err));

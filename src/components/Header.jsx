@@ -85,7 +85,7 @@ const Header = () => {
                   ? 'font-semibold text-center my-1 lg:my-0 bg-purple-700 text-white px-2 rounded'
                   : 'font-semibold text-center my-1 lg:my-0'
               }
-              to="/products/all"
+              to="/products"
             >
               Products
             </NavLink>

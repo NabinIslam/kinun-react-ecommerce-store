@@ -13,10 +13,10 @@ const TopRatedProducts = () => {
   } = useQuery({
     queryKey: 'products',
     queryFn: () =>
-      fetch('https://fakestoreapi.com/products').then(res => res.json()),
+      fetch('https://kinun.onrender.com/api/products').then(res => res.json()),
   });
 
-  //   if (isFetching) return <LoadingSpinner />;
+  if (isFetching) return <LoadingSpinner />;
   if (isLoading) return <LoadingSpinner />;
 
   return (
@@ -30,11 +30,11 @@ const TopRatedProducts = () => {
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-20">
-          {products
+          {products.products
             .sort((a, b) => b.rating.rate - a.rating.rate)
-            .map((product, index) => {
+            .map(product => {
               if (index < 4)
-                return <ProductCard key={product.id} product={product} />;
+                return <ProductCard key={product._id} product={product} />;
             })}
         </div>
 

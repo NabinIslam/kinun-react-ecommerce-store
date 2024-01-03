@@ -1,12 +1,13 @@
 import { Button } from 'flowbite-react';
-import React, { useContext } from 'react';
+import React from 'react';
 import { CgDetailsMore } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../features/cart/cartSlice';
 
 const ProductCard = ({ product }) => {
-  const { id, title, price, category, description, image } = product;
+  const { name, slug, description, price, image, category } = product;
+  const { slug: categorySlug } = category;
 
   const dispatch = useDispatch();
 
@@ -16,16 +17,15 @@ const ProductCard = ({ product }) => {
       data-aos="zoom-in"
     >
       <div>
-        <Link to={`/products/${id}`}>
+        <Link to={`/products/${categorySlug}/${slug}`}>
           <img className="h-64 mx-auto" src={image} alt="" />
         </Link>
 
-        <Link to={`/products/${id}`}>
-          <h4 className="mt-3 font-semibold text-lg hover:underline">
-            {title}
+        <Link to={`/products/${categorySlug}/${slug}`}>
+          <h4 className="mt-3 font-semibold text-lg hover:underline text-center">
+            {name}
           </h4>
         </Link>
-        <p className="mt-3">{description.slice(0, 70)}....</p>
       </div>
       <div>
         <div className="h-[1px] bg-slate-200 mt-3"></div>

@@ -3,17 +3,19 @@ import ProductsLayout from '../layouts/ProductsLayout';
 import Root from '../layouts/Root';
 import CartPage from '../pages/CartPage';
 import Contact from '../pages/Contact';
-import Electronics from '../pages/Electronics';
 import ErrorPage from '../pages/ErrorPage';
 import Home from '../pages/Home';
-import Jewelery from '../pages/Jewelery';
 import Login from '../pages/Login';
-import MensClothing from '../pages/MensClothing';
 import ProductDetails from '../pages/ProductDetails';
 import Products from '../pages/Products';
 import Register from '../pages/Register';
-import WomensClothing from '../pages/WomensClothing';
 import PrivateRoute from './PrivateRoute';
+import AdminLayout from '../layouts/AdminLayout';
+import AddProduct from '../pages/AddProduct';
+import AdminProductList from '../pages/AdminProductList';
+import AdminRoute from './AdminRoute';
+import Dashboard from '../pages/Dashboard';
+import AdminCategoryList from '../pages/AdminCategoryList';
 
 const router = createBrowserRouter([
   {
@@ -30,34 +32,14 @@ const router = createBrowserRouter([
         element: <ProductsLayout />,
         children: [
           {
-            path: '/products/all',
+            path: '/products',
             element: <Products />,
-          },
-          {
-            path: '/products/electronics',
-            element: <Electronics />,
-          },
-          {
-            path: '/products/jewelery',
-            element: <Jewelery />,
-          },
-          {
-            path: "/products/men's clothing",
-            element: <MensClothing />,
-          },
-          {
-            path: "/products/women's clothing",
-            element: <WomensClothing />,
           },
         ],
       },
       {
-        path: '/products/:productId',
-        element: (
-          <PrivateRoute>
-            <ProductDetails />,
-          </PrivateRoute>
-        ),
+        path: '/products/:category/:slug',
+        element: <ProductDetails />,
       },
       {
         path: '/login',
@@ -78,6 +60,56 @@ const router = createBrowserRouter([
             <CartPage />,
           </PrivateRoute>
         ),
+      },
+      {
+        path: '/admin',
+        element: (
+          <AdminRoute>
+            <AdminLayout />
+          </AdminRoute>
+        ),
+        children: [
+          {
+            path: '/admin',
+            element: (
+              <AdminRoute>
+                <Dashboard />
+              </AdminRoute>
+            ),
+          },
+          {
+            path: '/admin/dashboard',
+            element: (
+              <AdminRoute>
+                <Dashboard />
+              </AdminRoute>
+            ),
+          },
+          {
+            path: '/admin/add-product',
+            element: (
+              <AdminRoute>
+                <AddProduct />
+              </AdminRoute>
+            ),
+          },
+          {
+            path: '/admin/products',
+            element: (
+              <AdminRoute>
+                <AdminProductList />
+              </AdminRoute>
+            ),
+          },
+          {
+            path: '/admin/categories',
+            element: (
+              <AdminRoute>
+                <AdminCategoryList />
+              </AdminRoute>
+            ),
+          },
+        ],
       },
     ],
   },
