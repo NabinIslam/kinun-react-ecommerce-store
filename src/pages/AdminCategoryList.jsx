@@ -4,10 +4,13 @@ import React, { useState } from 'react';
 import LoadingSpinner from '../components/LoadingSpinner';
 import DeleteCategoryModal from '../modals/DeleteCategoryModal';
 import EditCategoryModal from '../modals/EditCategoryModal';
+import { HiPlus } from 'react-icons/hi';
+import UploadCategoryModal from '../modals/UploadCategoryModal';
 
 const AdminCategoryList = () => {
   const [openModal, setOpenModal] = useState(false);
   const [openEditCategoryModal, setOpenEditCategoryModal] = useState(false);
+  const [openUploadCategoryModal, setOpenUploadCategoryModal] = useState(false);
   const [categorySlug, setCategorySlug] = useState(null);
   const [categoryData, setCategoryData] = useState(null);
 
@@ -28,7 +31,14 @@ const AdminCategoryList = () => {
 
   return (
     <main>
-      <h4 className="font-bold text-2xl mb-10">All Categories</h4>
+      <div className="mb-2">
+        {' '}
+        <Button color="light" onClick={() => setOpenUploadCategoryModal(true)}>
+          Add Category
+          <HiPlus className="ml-2 h-5 w-5" />
+        </Button>
+      </div>
+      <h4 className="font-bold text-2xl mb-10">Categories</h4>
       <div>
         <Table hoverable>
           <Table.Head>
@@ -78,6 +88,11 @@ const AdminCategoryList = () => {
           </Table.Body>
         </Table>
       </div>
+      <UploadCategoryModal
+        openUploadCategoryModal={openUploadCategoryModal}
+        setOpenUploadCategoryModal={setOpenUploadCategoryModal}
+        refetch={refetch}
+      />
       <EditCategoryModal
         openEditCategoryModal={openEditCategoryModal}
         setOpenEditCategoryModal={setOpenEditCategoryModal}
