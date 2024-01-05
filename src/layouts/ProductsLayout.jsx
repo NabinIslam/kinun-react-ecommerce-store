@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { Select } from 'flowbite-react';
+import { Accordion, Checkbox, Label, Radio, Select } from 'flowbite-react';
 import { Combobox } from '@headlessui/react';
 import SearchProduct from '../components/SearchProduct';
+import { ApiUrlContext } from '../contexts/ApiUrlProvider';
 
 const ProductsLayout = () => {
+  const { productApi, setProductApi, refetch } = useContext(ApiUrlContext);
+
   const {
     data: categories = [],
     isFetching,
@@ -19,6 +22,14 @@ const ProductsLayout = () => {
       ),
   });
 
+  const handleCategory = e => {
+    const category = e.target.value;
+
+    const url = `https://kinun.onrender.com/api/products/category/${category}`;
+
+    setProductApi(url);
+  };
+
   if (isFetching) return <LoadingSpinner />;
   if (isLoading) return <LoadingSpinner />;
 
@@ -29,34 +40,39 @@ const ProductsLayout = () => {
       </div> */}
       <div className="container mx-auto flex flex-col lg:flex-row gap-4">
         <div className="basis-1/5 py-4 px-4 lg:px-0">
-          <div className="w-full bg-white rounded-md shadow lg:sticky lg:top-[70px]">
-            <h6 className="mx-3 py-1 font-semibold text-xl">Category</h6>
-            <div className="bg-slate-200 h-[1px]"></div>
-
-            <NavLink
-              className={({ isActive }) =>
-                isActive
-                  ? 'bg-slate-200 px-3 py-2 block'
-                  : 'hover:bg-slate-200 px-3 py-2 block'
-              }
-              to="/products"
-            >
-              All Products
-            </NavLink>
-
-            {categories.categories.map(category => (
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? 'bg-slate-200 px-3 py-2 block'
-                    : 'hover:bg-slate-200 px-3 py-2 block'
-                }
-                to={`/products/${category.slug}`}
-                key={category._id}
-              >
-                {category.name}
-              </NavLink>
-            ))}
+          <div className="w-full bg-white rounded-md shadow ">
+            <Accordion alwaysOpen>
+              <Accordion.Panel>
+                <Accordion.Title>Category</Accordion.Title>
+                <Accordion.Content>
+                  <fieldset className="flex max-w-md flex-col gap-4">
+                    {categories.categories.map(category => (
+                      <div
+                        className="flex items-center gap-2"
+                        key={category._id}
+                      >
+                        <Radio
+                          id={category.slug}
+                          name="categories"
+                          value={category.slug}
+                          onChange={handleCategory}
+                        />
+                        <Label htmlFor={category.slug}>{category.name}</Label>
+                      </div>
+                    ))}
+                  </fieldset>
+                </Accordion.Content>
+              </Accordion.Panel>
+              <Accordion.Panel>
+                <Accordion.Title>Brand</Accordion.Title>
+                <Accordion.Content>
+                  <div className="flex items-center gap-2">
+                    <Checkbox id="remember" />
+                    <Label htmlFor="remember">Remember me</Label>
+                  </div>
+                </Accordion.Content>
+              </Accordion.Panel>
+            </Accordion>
           </div>
         </div>
         <div className="basis-full p-4">
@@ -74,9 +90,7 @@ const ProductsLayout = () => {
                 </form>
               </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-              <Outlet />
-            </div>
+            <Outlet />
           </div>
         </div>
       </div>

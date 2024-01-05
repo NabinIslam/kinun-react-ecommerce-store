@@ -8,6 +8,7 @@ import AuthProvider from './contexts/AuthProvider';
 import ScrollToTop from 'react-scroll-to-top';
 import store from './app/store';
 import { Provider } from 'react-redux';
+import ApiUrlProvider from './contexts/ApiUrlProvider';
 
 const queryClient = new QueryClient();
 
@@ -15,41 +16,43 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <Toaster
-            position="top-center"
-            toastOptions={{
-              // Define default options
-              className: '',
-              duration: 3000,
-              style: {
-                background: '#363636',
-                color: '#fff',
-              },
+        <ApiUrlProvider>
+          <AuthProvider>
+            <Toaster
+              position="top-center"
+              toastOptions={{
+                // Define default options
+                className: '',
+                duration: 3000,
+                style: {
+                  background: '#363636',
+                  color: '#fff',
+                },
 
-              // Default options for specific types
-              success: {
-                duration: 3000,
-                theme: {
-                  primary: 'green',
-                  secondary: 'black',
+                // Default options for specific types
+                success: {
+                  duration: 3000,
+                  theme: {
+                    primary: 'green',
+                    secondary: 'black',
+                  },
                 },
-              },
-              error: {
-                duration: 3000,
-                theme: {
-                  primary: 'red',
-                  secondary: 'black',
+                error: {
+                  duration: 3000,
+                  theme: {
+                    primary: 'red',
+                    secondary: 'black',
+                  },
                 },
-              },
-            }}
-          />
-          <App />
-          <ScrollToTop
-            className="flex items-center justify-center border"
-            smooth
-          />
-        </AuthProvider>
+              }}
+            />
+            <App />
+            <ScrollToTop
+              className="flex items-center justify-center border"
+              smooth
+            />
+          </AuthProvider>
+        </ApiUrlProvider>
       </QueryClientProvider>
     </Provider>
   </React.StrictMode>

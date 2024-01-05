@@ -55,7 +55,12 @@ const Header = () => {
                   {user ? user.email : null}
                 </span>
               </Dropdown.Header>
-              <Dropdown.Item>Dashboard</Dropdown.Item>
+              {user?.email === 'admin@kinun.com' && (
+                <Link to="/admin">
+                  <Dropdown.Item>Dashboard</Dropdown.Item>
+                </Link>
+              )}
+
               <Dropdown.Item>Settings</Dropdown.Item>
               <Dropdown.Item>Earnings</Dropdown.Item>
               <Dropdown.Divider />
