@@ -8,7 +8,8 @@ import SearchProduct from '../components/SearchProduct';
 import { ApiUrlContext } from '../contexts/ApiUrlProvider';
 
 const ProductsLayout = () => {
-  const { productApi, setProductApi, refetch } = useContext(ApiUrlContext);
+  const { productApi, setProductApi, query, setQuery, refetch } =
+    useContext(ApiUrlContext);
 
   const {
     data: categories = [],
@@ -25,9 +26,18 @@ const ProductsLayout = () => {
   const handleCategory = e => {
     const category = e.target.value;
 
-    const url = `https://kinun.onrender.com/api/products/category/${category}`;
+    const url =
+      e.target.value === ''
+        ? `https://kinun.onrender.com/api/products`
+        : `https://kinun.onrender.com/api/products/category/${category}`;
 
     setProductApi(url);
+  };
+
+  const handleProductSort = e => {
+    setQuery(e.target.value);
+
+    setProductApi(productApi);
   };
 
   if (isFetching) return <LoadingSpinner />;
@@ -35,9 +45,9 @@ const ProductsLayout = () => {
 
   return (
     <div className="bg-[#F2F4F8]">
-      {/* <div className="container mx-auto">
+      <div className="container mx-auto pr-4 pl-4 lg:pl-0">
         <SearchProduct />
-      </div> */}
+      </div>
       <div className="container mx-auto flex flex-col lg:flex-row gap-4">
         <div className="basis-1/5 py-4 px-4 lg:px-0">
           <div className="w-full bg-white rounded-md shadow ">
@@ -46,6 +56,15 @@ const ProductsLayout = () => {
                 <Accordion.Title>Category</Accordion.Title>
                 <Accordion.Content>
                   <fieldset className="flex max-w-md flex-col gap-4">
+                    <div className="flex items-center gap-2">
+                      <Radio
+                        id="all"
+                        name="categories"
+                        value={''}
+                        onChange={handleCategory}
+                      />
+                      <Label htmlFor="all">All</Label>
+                    </div>
                     {categories.categories.map(category => (
                       <div
                         className="flex items-center gap-2"
@@ -63,7 +82,7 @@ const ProductsLayout = () => {
                   </fieldset>
                 </Accordion.Content>
               </Accordion.Panel>
-              <Accordion.Panel>
+              {/* <Accordion.Panel>
                 <Accordion.Title>Brand</Accordion.Title>
                 <Accordion.Content>
                   <div className="flex items-center gap-2">
@@ -71,7 +90,7 @@ const ProductsLayout = () => {
                     <Label htmlFor="remember">Remember me</Label>
                   </div>
                 </Accordion.Content>
-              </Accordion.Panel>
+              </Accordion.Panel> */}
             </Accordion>
           </div>
         </div>
@@ -80,14 +99,18 @@ const ProductsLayout = () => {
             <div className="bg-white py-2 px-2 mb-2 flex items-center justify-between rounded-lg shadow">
               <h2 className="text-lg font-bold">Products</h2>
               <div className="flex items-center gap-2">
-                <p className="font-bold">Sort By: </p>
-                <form action="">
-                  <Select className="w-24" sizing="sm" onChange={() => {}}>
-                    <option value="normal">Default</option>
-                    <option value="lowest">Price (Low to High)</option>
-                    <option value="highest">Price (High to Low)</option>
+                <p className="font-semibold text-sm">Sort By: </p>
+                <div>
+                  <Select
+                    className="w-full"
+                    sizing="sm"
+                    onChange={handleProductSort}
+                  >
+                    <option value="">Default</option>
+                    <option value="/?sort=price">Price (Low to High)</option>
+                    <option value="/?sort=-price">Price (High to Low)</option>
                   </Select>
-                </form>
+                </div>
               </div>
             </div>
             <Outlet />

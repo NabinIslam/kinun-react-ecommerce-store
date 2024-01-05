@@ -30,7 +30,7 @@ const TopHeader = () => {
           </a>
 
           <a href="tel:+8801234567890">
-            <p className="flex items-center gap-1 text-sm">
+            <p className="flex items-center gap-1 text-xs">
               <FaPhone />{' '}
               <span className="hidden md:inline">+880 1234 567890</span>
             </p>
@@ -38,17 +38,17 @@ const TopHeader = () => {
         </div>
         <div className="flex items-center gap-2">
           {user ? (
-            <Link className="text-sm" onClick={handleLogout}>
+            <Link className="text-xs" onClick={handleLogout}>
               Logout
             </Link>
           ) : (
             <>
               {' '}
-              <Link className="text-sm" to="/login">
+              <Link className="text-xs" to="/login">
                 Login
               </Link>
               <span>|</span>
-              <Link className="text-sm" to="/register">
+              <Link className="text-xs" to="/register">
                 Register
               </Link>
             </>

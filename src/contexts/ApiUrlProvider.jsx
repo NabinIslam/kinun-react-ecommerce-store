@@ -8,10 +8,9 @@ const ApiUrlProvider = ({ children }) => {
   const [productApi, setProductApi] = useState(
     `https://kinun.onrender.com/api/products`
   );
+  const [query, setQuery] = useState('');
 
-  console.log(productApi);
-
-  const { data, loading } = useFetchProducts(productApi);
+  const { data, loading } = useFetchProducts(productApi, query);
 
   // const {
   //   data: products = [],
@@ -26,6 +25,8 @@ const ApiUrlProvider = ({ children }) => {
   const value = {
     productApi,
     setProductApi,
+    query,
+    setQuery,
     data,
     loading,
   };
