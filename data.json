@@ -1,0 +1,193 @@
+{
+  "products": [
+    {
+      "_id": "659d17dacc72db55c535334c",
+      "name": "iPhone 12 64GB Blue",
+      "slug": "iphone-12-64gb-blue",
+      "price": 73500,
+      "image": "https://i.ibb.co/p3LcRfS/iphone-12-blue-01-500x500.webp",
+      "category": {
+        "_id": "65831f98612858b62176b721",
+        "name": "Mobile",
+        "slug": "mobile",
+        "createdAt": "2023-12-20T17:08:40.038Z",
+        "updatedAt": "2023-12-20T17:08:40.038Z",
+        "__v": 0
+      },
+      "brand": {
+        "_id": "659d11f94237db7e9a571f85",
+        "name": "Apple",
+        "slug": "apple",
+        "createdAt": "2024-01-09T09:29:29.122Z",
+        "updatedAt": "2024-01-09T09:29:29.122Z",
+        "__v": 0
+      },
+      "status": "In Stock",
+      "createdAt": "2024-01-09T09:54:34.669Z",
+      "updatedAt": "2024-01-09T09:54:34.669Z",
+      "__v": 0
+    },
+    {
+      "_id": "659d1853cc72db55c535338b",
+      "name": "iPhone 13 128GB",
+      "slug": "iphone-13-128gb",
+      "price": 87500,
+      "image": "https://i.ibb.co/QcJCvJ6/iphone-13-midnight-01-500x500-1.webp",
+      "category": {
+        "_id": "65831f98612858b62176b721",
+        "name": "Mobile",
+        "slug": "mobile",
+        "createdAt": "2023-12-20T17:08:40.038Z",
+        "updatedAt": "2023-12-20T17:08:40.038Z",
+        "__v": 0
+      },
+      "brand": {
+        "_id": "659d11f94237db7e9a571f85",
+        "name": "Apple",
+        "slug": "apple",
+        "createdAt": "2024-01-09T09:29:29.122Z",
+        "updatedAt": "2024-01-09T09:29:29.122Z",
+        "__v": 0
+      },
+      "status": "In Stock",
+      "createdAt": "2024-01-09T09:56:35.519Z",
+      "updatedAt": "2024-01-09T09:56:35.519Z",
+      "__v": 0
+    },
+    {
+      "_id": "659d1881cc72db55c535339a",
+      "name": "iPhone 15 Pro 128GB Black Titanium",
+      "slug": "iphone-15-pro-128gb-black-titanium",
+      "price": 145000,
+      "image": "https://i.ibb.co/RNFTvGS/iphone-15-pro-black-titanium-01-500x500.webp",
+      "category": {
+        "_id": "65831f98612858b62176b721",
+        "name": "Mobile",
+        "slug": "mobile",
+        "createdAt": "2023-12-20T17:08:40.038Z",
+        "updatedAt": "2023-12-20T17:08:40.038Z",
+        "__v": 0
+      },
+      "brand": {
+        "_id": "659d11f94237db7e9a571f85",
+        "name": "Apple",
+        "slug": "apple",
+        "createdAt": "2024-01-09T09:29:29.122Z",
+        "updatedAt": "2024-01-09T09:29:29.122Z",
+        "__v": 0
+      },
+      "status": "In Stock",
+      "createdAt": "2024-01-09T09:57:21.964Z",
+      "updatedAt": "2024-01-09T09:57:21.964Z",
+      "__v": 0
+    },
+    {
+      "_id": "659d1ce0cc72db55c53535cb",
+      "name": "Apple MacBook Air 13.3-Inch",
+      "slug": "apple-macbook-air-13.3-inch",
+      "price": 115000,
+      "image": "https://i.ibb.co/yqqDybg/macbook-air-13-3-inch-500x500-1.webp",
+      "category": {
+        "_id": "6580942daa9649cb04c19493",
+        "name": "Laptop",
+        "slug": "laptop",
+        "createdAt": "2023-12-18T18:49:17.165Z",
+        "updatedAt": "2023-12-18T18:49:17.165Z",
+        "__v": 0
+      },
+      "brand": {
+        "_id": "659d11f94237db7e9a571f85",
+        "name": "Apple",
+        "slug": "apple",
+        "createdAt": "2024-01-09T09:29:29.122Z",
+        "updatedAt": "2024-01-09T09:29:29.122Z",
+        "__v": 0
+      },
+      "status": "In Stock",
+      "createdAt": "2024-01-09T10:16:00.330Z",
+      "updatedAt": "2024-01-09T10:16:00.330Z",
+      "__v": 0
+    },
+    {
+      "_id": "659d1d47cc72db55c53535dc",
+      "name": "Apple MacBook Pro 14 inch M3 Chip",
+      "slug": "apple-macbook-pro-14-inch-m3-chip",
+      "price": 228000,
+      "image": "https://i.ibb.co/D9hyNSx/macbook-pro-m3-space-gray-01-500x500.webp",
+      "category": {
+        "_id": "6580942daa9649cb04c19493",
+        "name": "Laptop",
+        "slug": "laptop",
+        "createdAt": "2023-12-18T18:49:17.165Z",
+        "updatedAt": "2023-12-18T18:49:17.165Z",
+        "__v": 0
+      },
+      "brand": {
+        "_id": "659d11f94237db7e9a571f85",
+        "name": "Apple",
+        "slug": "apple",
+        "createdAt": "2024-01-09T09:29:29.122Z",
+        "updatedAt": "2024-01-09T09:29:29.122Z",
+        "__v": 0
+      },
+      "status": "In Stock",
+      "createdAt": "2024-01-09T10:17:43.280Z",
+      "updatedAt": "2024-01-09T10:17:43.280Z",
+      "__v": 0
+    },
+    {
+      "_id": "659d1d84cc72db55c53535e9",
+      "name": "Apple MacBook Pro 16 inch M3 Pro",
+      "slug": "apple-macbook-pro-16-inch-m3-pro",
+      "price": 380000,
+      "image": "https://i.ibb.co/gwSQ1ZT/macbook-pro-16-inch-m3-pro-black-01-500x500.webp",
+      "category": {
+        "_id": "6580942daa9649cb04c19493",
+        "name": "Laptop",
+        "slug": "laptop",
+        "createdAt": "2023-12-18T18:49:17.165Z",
+        "updatedAt": "2023-12-18T18:49:17.165Z",
+        "__v": 0
+      },
+      "brand": {
+        "_id": "659d11f94237db7e9a571f85",
+        "name": "Apple",
+        "slug": "apple",
+        "createdAt": "2024-01-09T09:29:29.122Z",
+        "updatedAt": "2024-01-09T09:29:29.122Z",
+        "__v": 0
+      },
+      "status": "In Stock",
+      "createdAt": "2024-01-09T10:18:44.613Z",
+      "updatedAt": "2024-01-09T10:18:44.613Z",
+      "__v": 0
+    },
+    {
+      "_id": "659d1debcc72db55c535364c",
+      "name": "A4TECH HU-35 USB Headphone",
+      "slug": "a4tech-hu-35-usb-headphone",
+      "price": 1250,
+      "image": "https://i.ibb.co/nzzGHgH/hu-35-1-500x500.jpg",
+      "category": {
+        "_id": "659c3e2bc7974df78528dfdc",
+        "name": "Headphone",
+        "slug": "headphone",
+        "createdAt": "2024-01-08T18:25:47.711Z",
+        "updatedAt": "2024-01-08T18:25:47.711Z",
+        "__v": 0
+      },
+      "brand": {
+        "_id": "6575f4ba6f778d2582a34061",
+        "name": "A4tech",
+        "slug": "a4tech",
+        "createdAt": "2023-12-10T17:26:18.074Z",
+        "updatedAt": "2023-12-10T17:26:18.074Z",
+        "__v": 0
+      },
+      "status": "In Stock",
+      "createdAt": "2024-01-09T10:20:27.214Z",
+      "updatedAt": "2024-01-09T10:20:27.214Z",
+      "__v": 0
+    }
+  ]
+}

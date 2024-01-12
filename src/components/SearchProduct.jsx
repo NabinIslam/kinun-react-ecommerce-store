@@ -56,7 +56,7 @@ const SearchProduct = () => {
                   key={product._id}
                   className={({ active }) =>
                     `relative cursor-pointer select-none py-2 pl-2 pr-4 ${
-                      active ? 'bg-teal-600 text-white' : 'text-gray-900'
+                      active ? 'bg-purple-700 text-white' : 'text-gray-900'
                     }`
                   }
                   value={product.name}

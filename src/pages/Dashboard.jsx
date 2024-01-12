@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import LoadingSpinner from '../components/LoadingSpinner';
+import usePageTitle from '../hooks/usePageTitle';
 
 const Dashboard = () => {
+  usePageTitle('Dashboard');
   const {
     data: products = [],
     isFetching,
@@ -19,7 +21,7 @@ const Dashboard = () => {
     <main>
       <h4 className="font-bold text-2xl mb-10">Dashboard</h4>
       <div>
-        <h5 className='text-xl'>Total products: {products.products.length}</h5>
+        <h5 className="text-xl">Total products: {products.products.length}</h5>
       </div>
     </main>
   );

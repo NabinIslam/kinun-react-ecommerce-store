@@ -27,6 +27,7 @@
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.7.1",
     "react-loader-spinner": "^5.3.4",
+    "react-photo-view": "^1.2.4",
     "react-quill": "^2.0.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.21.1",

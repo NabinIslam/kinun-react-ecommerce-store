@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-function useFetchProducts(url, query = '') {
+function useFetchProducts(categoryQuery = '', brandQuery = '', sortQuery = '') {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -8,16 +8,24 @@ function useFetchProducts(url, query = '') {
   useEffect(() => {
     setLoading(true);
 
-    fetch(url + query)
+    console.log(
+      `https://kinun.onrender.com/api/products/?category=${categoryQuery}&brand=${brandQuery}&sort=${sortQuery}`
+    );
+
+    fetch(
+      `https://kinun.onrender.com/api/products/?category=${categoryQuery}&brand=${brandQuery}&sort=${sortQuery}`
+    )
       .then(res => res.json())
       .then(data => setData(data))
       .catch(err => setError(err))
       .finally(() => setLoading(false));
-  }, [url, query]);
+  }, [categoryQuery, brandQuery, sortQuery]);
 
   const refetch = () => {
     setLoading(true);
-    fetch(url)
+    fetch(
+      `https://kinun.onrender.com/api/products/?category=${categoryQuery}&brand=${brandQuery}&sort=${sortQuery}`
+    )
       .then(res => res.json())
       .then(data => setData(data))
       .catch(err => setError(err))

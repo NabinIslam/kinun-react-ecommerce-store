@@ -1,8 +1,10 @@
-import { Avatar, Dropdown, Navbar } from 'flowbite-react';
+import { Avatar, Badge, Dropdown, Navbar } from 'flowbite-react';
 import React, { useContext } from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { FaShoppingCart } from 'react-icons/fa';
+
 import toast from 'react-hot-toast';
 
 const Header = () => {
@@ -61,14 +63,14 @@ const Header = () => {
                 </Link>
               )}
 
-              <Dropdown.Item>Settings</Dropdown.Item>
-              <Dropdown.Item>Earnings</Dropdown.Item>
               <Dropdown.Divider />
               <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
             </Dropdown>
-            <Link className="flex items-center gap-1" to="/cart">
-              <AiOutlineShoppingCart className="text-2xl" />
-              <p></p>
+            <Link
+              className="flex items-center gap-1 hover:bg-slate-200 p-1 rounded"
+              to="/cart"
+            >
+              <FaShoppingCart className="text-2xl" />
             </Link>
             <Navbar.Toggle className="ml-2" />
           </div>

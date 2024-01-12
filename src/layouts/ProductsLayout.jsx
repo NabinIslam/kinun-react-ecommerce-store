@@ -1,20 +1,19 @@
 import React, { useContext } from 'react';
-import { Outlet, NavLink } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Accordion, Checkbox, Label, Radio, Select } from 'flowbite-react';
-import { Combobox } from '@headlessui/react';
 import SearchProduct from '../components/SearchProduct';
 import { ApiUrlContext } from '../contexts/ApiUrlProvider';
 
 const ProductsLayout = () => {
-  const { productApi, setProductApi, query, setQuery, refetch } =
+  const { setCategoryQuery, setBrandQuery, setSortQuery, data } =
     useContext(ApiUrlContext);
 
   const {
     data: categories = [],
-    isFetching,
-    isLoading,
+    isFetching: isCategoriesFetching,
+    isLoading: isCategoriesLoading,
   } = useQuery({
     queryKey: ['categories'],
     queryFn: () =>
@@ -22,26 +21,34 @@ const ProductsLayout = () => {
         res.json()
       ),
   });
+  const {
+    data: brands = [],
+    isFetching: isBrandsFetching,
+    isLoading: isBrandsLoading,
+  } = useQuery({
+    queryKey: ['brands'],
+    queryFn: () =>
+      fetch('https://kinun.onrender.com/api/brands').then(res => res.json()),
+  });
 
-  const handleCategory = e => {
-    const category = e.target.value;
+  const handleCategory = e => setCategoryQuery(e.target.value);
 
-    const url =
-      e.target.value === ''
-        ? `https://kinun.onrender.com/api/products`
-        : `https://kinun.onrender.com/api/products/category/${category}`;
+  const handleBrand = e => setBrandQuery(e.target.value);
 
-    setProductApi(url);
-  };
+  const currentProductsBrands = [
+    ...new Set(data?.products?.map(product => product?.brand)),
+  ];
 
-  const handleProductSort = e => {
-    setQuery(e.target.value);
+  const filteredBrands = brands?.brands?.filter(
+    elements => elements === data?.products?.map(product => product.brand)
+  );
 
-    setProductApi(productApi);
-  };
+  const handleProductSort = e => setSortQuery(e.target.value);
 
-  if (isFetching) return <LoadingSpinner />;
-  if (isLoading) return <LoadingSpinner />;
+  if (isCategoriesFetching) return <LoadingSpinner />;
+  if (isCategoriesLoading) return <LoadingSpinner />;
+  if (isBrandsFetching) return <LoadingSpinner />;
+  if (isBrandsLoading) return <LoadingSpinner />;
 
   return (
     <div className="bg-[#F2F4F8]">
@@ -58,14 +65,14 @@ const ProductsLayout = () => {
                   <fieldset className="flex max-w-md flex-col gap-4">
                     <div className="flex items-center gap-2">
                       <Radio
-                        id="all"
+                        id="allCategories"
                         name="categories"
                         value={''}
                         onChange={handleCategory}
                       />
-                      <Label htmlFor="all">All</Label>
+                      <Label htmlFor="allCategories">All</Label>
                     </div>
-                    {categories.categories.map(category => (
+                    {categories?.categories?.map(category => (
                       <div
                         className="flex items-center gap-2"
                         key={category._id}
@@ -82,15 +89,45 @@ const ProductsLayout = () => {
                   </fieldset>
                 </Accordion.Content>
               </Accordion.Panel>
-              {/* <Accordion.Panel>
+            </Accordion>
+          </div>
+          <div className="w-full bg-white rounded-md shadow mt-2">
+            <Accordion alwaysOpen>
+              <Accordion.Panel>
                 <Accordion.Title>Brand</Accordion.Title>
                 <Accordion.Content>
-                  <div className="flex items-center gap-2">
-                    <Checkbox id="remember" />
-                    <Label htmlFor="remember">Remember me</Label>
-                  </div>
+                  <fieldset className="flex max-w-md flex-col gap-4">
+                    <div className="flex items-center gap-2">
+                      <Radio
+                        id="allBrands"
+                        name="brands"
+                        value={''}
+                        onChange={handleBrand}
+                      />
+                      <Label htmlFor="allBrands">All</Label>
+                    </div>
+                    {brands?.brands?.sort().map(brand => (
+                      <div className="flex items-center gap-2" key={brand._id}>
+                        <Radio
+                          id={brand.slug}
+                          name="brands"
+                          value={brand.slug}
+                          onChange={handleBrand}
+                        />
+                        <Label htmlFor={brand.slug}>{brand.name}</Label>
+                      </div>
+                      // <div className="flex items-center gap-2" key={index}>
+                      //   <Checkbox
+                      //     id={brand}
+                      //     value={brand.toLowerCase()}
+                      //     onChange={handleBrand}
+                      //   />
+                      //   <Label htmlFor={brand}>{brand}</Label>
+                      // </div>
+                    ))}
+                  </fieldset>
                 </Accordion.Content>
-              </Accordion.Panel> */}
+              </Accordion.Panel>
             </Accordion>
           </div>
         </div>
@@ -107,8 +144,8 @@ const ProductsLayout = () => {
                     onChange={handleProductSort}
                   >
                     <option value="">Default</option>
-                    <option value="/?sort=price">Price (Low to High)</option>
-                    <option value="/?sort=-price">Price (High to Low)</option>
+                    <option value="price">Price (Low to High)</option>
+                    <option value="-price">Price (High to Low)</option>
                   </Select>
                 </div>
               </div>

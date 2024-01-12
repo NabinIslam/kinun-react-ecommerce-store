@@ -6,11 +6,17 @@ export const ApiUrlContext = createContext();
 
 const ApiUrlProvider = ({ children }) => {
   const [productApi, setProductApi] = useState(
-    `https://kinun.onrender.com/api/products`
+    `https://kinun.onrender.com/api/products/`
   );
-  const [query, setQuery] = useState('');
+  const [categoryQuery, setCategoryQuery] = useState('');
+  const [brandQuery, setBrandQuery] = useState('');
+  const [sortQuery, setSortQuery] = useState('');
 
-  const { data, loading } = useFetchProducts(productApi, query);
+  const { data, loading } = useFetchProducts(
+    categoryQuery,
+    brandQuery,
+    sortQuery
+  );
 
   // const {
   //   data: products = [],
@@ -23,10 +29,12 @@ const ApiUrlProvider = ({ children }) => {
   // });
 
   const value = {
-    productApi,
-    setProductApi,
-    query,
-    setQuery,
+    categoryQuery,
+    setCategoryQuery,
+    brandQuery,
+    setBrandQuery,
+    sortQuery,
+    setSortQuery,
     data,
     loading,
   };

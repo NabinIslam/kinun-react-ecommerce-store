@@ -6,14 +6,14 @@ import GoogleButton from 'react-google-button';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
 import { toast } from 'react-hot-toast';
+import usePageTitle from '../hooks/usePageTitle';
 
 const Login = () => {
   const { handleSubmit, register } = useForm();
-
   const { signIn, googleSignIn } = useContext(AuthContext);
-
   const location = useLocation();
   const navigate = useNavigate();
+  usePageTitle('Login');
 
   const from = location.state?.from?.pathname || '/';
 

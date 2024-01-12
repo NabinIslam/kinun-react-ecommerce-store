@@ -3,9 +3,12 @@ import React from 'react';
 import contactImg from '../assets/contact-img.jpg';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import usePageTitle from '../hooks/usePageTitle';
 
 const Contact = () => {
   const { handleSubmit, register, reset } = useForm();
+
+  usePageTitle('Contact');
 
   const handleContact = data => {
     fetch('https://kinun.onrender.com/api/contacts', {

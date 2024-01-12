@@ -16,14 +16,24 @@ const AddProduct = () => {
 
   const {
     data: categories = [],
-    isFetching,
-    isLoading,
+    isFetching: isFetchingCategories,
+    isLoading: isLoadingCategories,
   } = useQuery({
     queryKey: ['categories'],
     queryFn: () =>
       fetch('https://kinun.onrender.com/api/categories').then(res =>
         res.json()
       ),
+  });
+
+  const {
+    data: brands = [],
+    isFetching: isFetchingBrands,
+    isLoading: isLoadingBrands,
+  } = useQuery({
+    queryKey: ['brands'],
+    queryFn: () =>
+      fetch(`https://kinun.onrender.com/api/brands`).then(res => res.json()),
   });
 
   const imgHostApiKey = import.meta.env.VITE_APP_IMAGEBB_API_KEY;
@@ -45,6 +55,7 @@ const AddProduct = () => {
           price: data.price,
           image: res.data.data.url,
           category: data.category,
+          brand: data.brand,
         };
 
         fetch(`https://kinun.onrender.com/api/products`, {
@@ -68,8 +79,10 @@ const AddProduct = () => {
     });
   };
 
-  if (isLoading) return <LoadingSpinner />;
-  if (loading) return <LoadingSpinner />;
+  // if (isFetchingCategories) return <LoadingSpinner />;
+  if (isLoadingCategories) return <LoadingSpinner />;
+  // if (isFetchingBrands) return <LoadingSpinner />;
+  if (isLoadingBrands) return <LoadingSpinner />;
 
   return (
     <main className="">
@@ -126,9 +139,22 @@ const AddProduct = () => {
           </div>
 
           <Select {...register('category')}>
-            {categories.categories.map(category => (
+            {categories?.categories?.map(category => (
               <option value={category._id} key={category._id}>
                 {category.name}
+              </option>
+            ))}
+          </Select>
+        </div>
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="select" value="Brand" />
+          </div>
+
+          <Select {...register('brand')}>
+            {brands?.brands?.map(brand => (
+              <option value={brand._id} key={brand._id}>
+                {brand.name}
               </option>
             ))}
           </Select>

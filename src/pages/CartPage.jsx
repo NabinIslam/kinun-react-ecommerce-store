@@ -5,14 +5,27 @@ import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFromCart } from '../features/cart/cartSlice';
+import toast from 'react-hot-toast';
 
 const CartPage = () => {
   const cart = useSelector(state => state.cart.cart);
 
+  console.log(cart);
+
   const dispatch = useDispatch();
 
+  if (cart.length === 0)
+    return (
+      <main className="py-20">
+        <div className="container mx-auto py-10 text-center font-bold text-4xl">
+          <h1 className="">Your cart is empty</h1>
+          <p>😔</p>
+        </div>
+      </main>
+    );
+
   return (
-    <div>
+    <main>
       <div className="container mx-auto py-10">
         <Table className="border" hoverable={true}>
           <Table.Head>
@@ -33,15 +46,12 @@ const CartPage = () => {
                       className="hover:underline"
                       to={`/products/${product._id}`}
                     >
-                      {product.title}
+                      {product.name}
                     </Link>
                   </span>
                 </Table.Cell>
                 <Table.Cell>${product.price}</Table.Cell>
-                <Table.Cell>
-                  {product.category.charAt(0).toUpperCase() +
-                    product.category.slice(1).toLowerCase()}
-                </Table.Cell>
+                <Table.Cell>{product.category.name}</Table.Cell>
                 <Table.Cell>
                   <span className="font-bold flex items-center gap-2">
                     {product.quantity}
@@ -52,7 +62,10 @@ const CartPage = () => {
                   <Button
                     color="failure"
                     size="sm"
-                    onClick={() => dispatch(removeFromCart(product))}
+                    onClick={() => {
+                      dispatch(removeFromCart(product));
+                      toast.error(`Item removed from cart`);
+                    }}
                   >
                     <BsFillTrashFill />
                   </Button>
@@ -62,7 +75,7 @@ const CartPage = () => {
           </Table.Body>
         </Table>
       </div>
-    </div>
+    </main>
   );
 };
 

@@ -22,6 +22,9 @@ const AdminLayout = () => {
                 <Sidebar.Item icon={HiShoppingBag}>
                   <Link to="/admin/categories">Categories</Link>
                 </Sidebar.Item>
+                <Sidebar.Item icon={HiShoppingBag}>
+                  <Link to="/admin/brands">Brands</Link>
+                </Sidebar.Item>
               </Sidebar.Collapse>
               <Sidebar.Item icon={HiUser}>Users</Sidebar.Item>
             </Sidebar.ItemGroup>
