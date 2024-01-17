@@ -5,6 +5,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import { Accordion, Checkbox, Label, Radio, Select } from 'flowbite-react';
 import SearchProduct from '../components/SearchProduct';
 import { ApiUrlContext } from '../contexts/ApiUrlProvider';
+import CatNBrandSkeleton from '../loadingSkeletons/CatNBrandSkeleton';
 
 const ProductsLayout = () => {
   const { setCategoryQuery, setBrandQuery, setSortQuery, data } =
@@ -35,20 +36,7 @@ const ProductsLayout = () => {
 
   const handleBrand = e => setBrandQuery(e.target.value);
 
-  const currentProductsBrands = [
-    ...new Set(data?.products?.map(product => product?.brand)),
-  ];
-
-  const filteredBrands = brands?.brands?.filter(
-    elements => elements === data?.products?.map(product => product.brand)
-  );
-
   const handleProductSort = e => setSortQuery(e.target.value);
-
-  if (isCategoriesFetching) return <LoadingSpinner />;
-  if (isCategoriesLoading) return <LoadingSpinner />;
-  if (isBrandsFetching) return <LoadingSpinner />;
-  if (isBrandsLoading) return <LoadingSpinner />;
 
   return (
     <div className="bg-[#F2F4F8]">
@@ -57,79 +45,83 @@ const ProductsLayout = () => {
       </div>
       <div className="container mx-auto flex flex-col lg:flex-row gap-4">
         <div className="basis-1/5 py-4 px-4 lg:px-0">
-          <div className="w-full bg-white rounded-md shadow ">
-            <Accordion alwaysOpen>
-              <Accordion.Panel>
-                <Accordion.Title>Category</Accordion.Title>
-                <Accordion.Content>
-                  <fieldset className="flex max-w-md flex-col gap-4">
-                    <div className="flex items-center gap-2">
-                      <Radio
-                        id="allCategories"
-                        name="categories"
-                        value={''}
-                        onChange={handleCategory}
-                      />
-                      <Label htmlFor="allCategories">All</Label>
-                    </div>
-                    {categories?.categories?.map(category => (
-                      <div
-                        className="flex items-center gap-2"
-                        key={category._id}
-                      >
+          {isCategoriesFetching || isCategoriesLoading ? (
+            <CatNBrandSkeleton />
+          ) : (
+            <div className="w-full bg-white rounded-md shadow ">
+              <Accordion alwaysOpen>
+                <Accordion.Panel>
+                  <Accordion.Title>Category</Accordion.Title>
+                  <Accordion.Content>
+                    <fieldset className="flex max-w-md flex-col gap-4">
+                      <div className="flex items-center gap-2">
                         <Radio
-                          id={category.slug}
+                          id="allCategories"
                           name="categories"
-                          value={category.slug}
+                          value={''}
                           onChange={handleCategory}
                         />
-                        <Label htmlFor={category.slug}>{category.name}</Label>
+                        <Label htmlFor="allCategories">All</Label>
                       </div>
-                    ))}
-                  </fieldset>
-                </Accordion.Content>
-              </Accordion.Panel>
-            </Accordion>
-          </div>
-          <div className="w-full bg-white rounded-md shadow mt-2">
-            <Accordion alwaysOpen>
-              <Accordion.Panel>
-                <Accordion.Title>Brand</Accordion.Title>
-                <Accordion.Content>
-                  <fieldset className="flex max-w-md flex-col gap-4">
-                    <div className="flex items-center gap-2">
-                      <Radio
-                        id="allBrands"
-                        name="brands"
-                        value={''}
-                        onChange={handleBrand}
-                      />
-                      <Label htmlFor="allBrands">All</Label>
-                    </div>
-                    {brands?.brands?.sort().map(brand => (
-                      <div className="flex items-center gap-2" key={brand._id}>
+                      {categories?.categories?.map(category => (
+                        <div
+                          className="flex items-center gap-2"
+                          key={category._id}
+                        >
+                          <Radio
+                            id={category.slug}
+                            name="categories"
+                            value={category.slug}
+                            onChange={handleCategory}
+                          />
+                          <Label htmlFor={category.slug}>{category.name}</Label>
+                        </div>
+                      ))}
+                    </fieldset>
+                  </Accordion.Content>
+                </Accordion.Panel>
+              </Accordion>
+            </div>
+          )}
+
+          {isBrandsFetching || isBrandsLoading ? (
+            <CatNBrandSkeleton />
+          ) : (
+            <div className="w-full bg-white rounded-md shadow mt-2">
+              <Accordion alwaysOpen>
+                <Accordion.Panel>
+                  <Accordion.Title>Brand</Accordion.Title>
+                  <Accordion.Content>
+                    <fieldset className="flex max-w-md flex-col gap-4">
+                      <div className="flex items-center gap-2">
                         <Radio
-                          id={brand.slug}
+                          id="allBrands"
                           name="brands"
-                          value={brand.slug}
+                          value={''}
                           onChange={handleBrand}
                         />
-                        <Label htmlFor={brand.slug}>{brand.name}</Label>
+                        <Label htmlFor="allBrands">All</Label>
                       </div>
-                      // <div className="flex items-center gap-2" key={index}>
-                      //   <Checkbox
-                      //     id={brand}
-                      //     value={brand.toLowerCase()}
-                      //     onChange={handleBrand}
-                      //   />
-                      //   <Label htmlFor={brand}>{brand}</Label>
-                      // </div>
-                    ))}
-                  </fieldset>
-                </Accordion.Content>
-              </Accordion.Panel>
-            </Accordion>
-          </div>
+                      {brands?.brands?.sort().map(brand => (
+                        <div
+                          className="flex items-center gap-2"
+                          key={brand._id}
+                        >
+                          <Radio
+                            id={brand.slug}
+                            name="brands"
+                            value={brand.slug}
+                            onChange={handleBrand}
+                          />
+                          <Label htmlFor={brand.slug}>{brand.name}</Label>
+                        </div>
+                      ))}
+                    </fieldset>
+                  </Accordion.Content>
+                </Accordion.Panel>
+              </Accordion>
+            </div>
+          )}
         </div>
         <div className="basis-full p-4">
           <div>

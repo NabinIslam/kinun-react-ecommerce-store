@@ -3,6 +3,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import ProductCard from '../components/ProductCard';
 import { ApiUrlContext } from '../contexts/ApiUrlProvider';
 import usePageTitle from '../hooks/usePageTitle';
+import ProductSkeleton from '../loadingSkeletons/ProductSkeleton';
 
 const Products = () => {
   const { data, loading } = useContext(ApiUrlContext);
@@ -18,7 +19,7 @@ const Products = () => {
   // });
 
   // if (isFetching) return <LoadingSpinner />;
-  if (loading) return <LoadingSpinner />;
+  if (loading) return <ProductSkeleton />;
 
   if (data?.products?.length === 0)
     return (

@@ -11,52 +11,56 @@ import { Provider } from 'react-redux';
 import ApiUrlProvider from './contexts/ApiUrlProvider';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
+import { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <PhotoProvider>
-      <Provider store={store}>
-        <QueryClientProvider client={queryClient}>
-          <ApiUrlProvider>
-            <AuthProvider>
-              <Toaster
-                position="bottom-left"
-                toastOptions={{
-                  // Define default options
-                  className: '',
-                  duration: 3000,
-                  style: {
-                    background: '#363636',
-                    color: '#fff',
-                  },
-                  // Default options for specific types
-                  success: {
+    <SkeletonTheme baseColor="#F0F0F0" highlightColor="#fff">
+      <PhotoProvider>
+        <Provider store={store}>
+          <QueryClientProvider client={queryClient}>
+            <ApiUrlProvider>
+              <AuthProvider>
+                <Toaster
+                  position="bottom-left"
+                  toastOptions={{
+                    // Define default options
+                    className: '',
                     duration: 3000,
-                    theme: {
-                      primary: 'green',
-                      secondary: 'black',
+                    style: {
+                      background: '#363636',
+                      color: '#fff',
                     },
-                  },
-                  error: {
-                    duration: 3000,
-                    theme: {
-                      primary: 'red',
-                      secondary: 'black',
+                    // Default options for specific types
+                    success: {
+                      duration: 3000,
+                      theme: {
+                        primary: 'green',
+                        secondary: 'black',
+                      },
                     },
-                  },
-                }}
-              />
-              <App />
-              <ScrollToTop
-                className="flex items-center justify-center border"
-                smooth
-              />
-            </AuthProvider>
-          </ApiUrlProvider>
-        </QueryClientProvider>
-      </Provider>
-    </PhotoProvider>
+                    error: {
+                      duration: 3000,
+                      theme: {
+                        primary: 'red',
+                        secondary: 'black',
+                      },
+                    },
+                  }}
+                />
+                <App />
+                <ScrollToTop
+                  className="flex items-center justify-center border"
+                  smooth
+                />
+              </AuthProvider>
+            </ApiUrlProvider>
+          </QueryClientProvider>
+        </Provider>
+      </PhotoProvider>
+    </SkeletonTheme>
   </React.StrictMode>
 );
