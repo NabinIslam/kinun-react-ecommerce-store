@@ -20,7 +20,7 @@ const TopHeader = () => {
 
   return (
     <div className="bg-[#232F3E] text-white">
-      <div className="container mx-auto flex items-center justify-between py-1 px-4 lg:px-0">
+      <div className="container mx-auto flex items-center justify-between py-1 px-4">
         <div className="flex items-center gap-5">
           <a href="mailto:info@kinun.com" target="_blank">
             <p className="flex items-center gap-1 text-sm">

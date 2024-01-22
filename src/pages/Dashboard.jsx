@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+
 import LoadingSpinner from '../components/LoadingSpinner';
 import usePageTitle from '../hooks/usePageTitle';
 

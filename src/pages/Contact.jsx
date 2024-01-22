@@ -1,5 +1,5 @@
 import { Button, Label, Textarea, TextInput } from 'flowbite-react';
-import React from 'react';
+
 import contactImg from '../assets/contact-img.jpg';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';

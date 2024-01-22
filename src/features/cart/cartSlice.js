@@ -1,51 +1,109 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import toast from 'react-hot-toast';
 
 const initialState = {
-  cart: [],
+  status: 'idle',
+  items: [],
+  cartLoaded: false,
 };
 
-const cartSlice = createSlice({
+export const addToCartAsync = createAsyncThunk('cart/addToCart', async item => {
+  const response = await fetch(`https://kinun.onrender.com/api/cart/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(item),
+  });
+  const data = response.json();
+
+  if (data.success) {
+    toast.success(data.message);
+    return data;
+  } else {
+    toast.error(data.message);
+  }
+});
+
+export const fetchItemsByUserIdAsync = createAsyncThunk(
+  'cart/fetchItemsByUserId',
+  async () => {}
+);
+
+export const updateCartAsync = createAsyncThunk(
+  'cart/updateCart',
+  async update => {}
+);
+
+export const deleteItemFromCartAsync = createAsyncThunk(
+  'cart/deleteItemFromCart',
+  async itemId => {}
+);
+
+export const resetCartAsync = createAsyncThunk(
+  'cart/resetCart',
+  async () => {}
+);
+
+export const cartSlice = createSlice({
   name: 'cart',
   initialState,
-  reducers: {
-    addToCart: (state, action) => {
-      const selectedProduct = state.cart.find(
-        product => product._id === action.payload._id
-      );
-
-      if (!selectedProduct) {
-        const product = { ...action.payload, quantity: 1 };
-        state.cart.push(product);
-      } else {
-        selectedProduct.quantity += 1;
-        state.cart
-          .filter(product => product._id !== selectedProduct._id)
-          .push(selectedProduct);
-      }
-
-      console.log(action);
-    },
-    removeFromCart: (state, action) => {
-      if (action.payload.quantity > 1) {
-        const product = {
-          ...action.payload,
-          quantity: action.payload.quantity - 1,
-        };
-
-        state.cart = state.cart.filter(
-          product => product._id !== action.payload._id
-        );
-
-        state.cart.push(product);
-      } else {
-        state.cart = state.cart.filter(
-          product => product._id !== action.payload._id
-        );
-      }
-    },
+  reducers: {},
+  extraReducers: builder => {
+    builder
+      .addCase(addToCartAsync.pending, state => {
+        state.status = 'loading';
+      })
+      .addCase(addToCartAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.items.push(action.payload);
+      });
+    //   .addCase(fetchItemsByUserIdAsync.pending, state => {
+    //     state.status = 'loading';
+    //   })
+    //   .addCase(fetchItemsByUserIdAsync.fulfilled, (state, action) => {
+    //     state.status = 'idle';
+    //     state.items = action.payload;
+    //     state.cartLoaded = true;
+    //   })
+    //   .addCase(fetchItemsByUserIdAsync.rejected, (state, action) => {
+    //     state.status = 'idle';
+    //     state.cartLoaded = true;
+    //   })
+    //   .addCase(updateCartAsync.pending, state => {
+    //     state.status = 'loading';
+    //   })
+    //   .addCase(updateCartAsync.fulfilled, (state, action) => {
+    //     state.status = 'idle';
+    //     const index = state.items.findIndex(
+    //       item => item.id === action.payload.id
+    //     );
+    //     state.items[index] = action.payload;
+    //   })
+    //   .addCase(deleteItemFromCartAsync.pending, state => {
+    //     state.status = 'loading';
+    //   })
+    //   .addCase(deleteItemFromCartAsync.fulfilled, (state, action) => {
+    //     state.status = 'idle';
+    //     const index = state.items.findIndex(
+    //       item => item.id === action.payload.id
+    //     );
+    //     state.items.splice(index, 1);
+    //   })
+    //   .addCase(resetCartAsync.pending, state => {
+    //     state.status = 'loading';
+    //   })
+    //   .addCase(resetCartAsync.fulfilled, (state, action) => {
+    //     state.status = 'idle';
+    //     state.items = [];
+    //   });
   },
 });
 
-export const { addToCart , removeFromCart} = cartSlice.actions;
+// export const { increment } = cartSlice.actions;
+
+export const selectItems = state => state.cart.items;
+export const selectCartStatus = state => state.cart.status;
+export const selectCartLoaded = state => state.cart.cartLoaded;
 
 export default cartSlice.reducer;

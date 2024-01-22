@@ -3,10 +3,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import { CgDetailsMore } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../features/cart/cartSlice';
 import toast from 'react-hot-toast';
 import { MdFavorite, MdFavoriteBorder } from 'react-icons/md';
 import { AuthContext } from '../contexts/AuthProvider';
+import parse from 'html-react-parser';
 
 const ProductCard = ({ product }) => {
   const [wishlist, setWishlist] = useState(false);
@@ -14,7 +14,7 @@ const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const [favorite, setFavorite] = useState(false);
 
-  const { name, slug, price, image, category } = product;
+  const { _id, name, slug, price, image, category, shortDescription } = product;
   const { slug: categorySlug } = category;
 
   const handleAddToWishlist = () => {
@@ -43,12 +43,37 @@ const ProductCard = ({ product }) => {
       });
   };
 
+  const handleAddToCart = productId => {
+    const item = {
+      quantity: 1,
+      product: productId,
+      user: { email: user?.email },
+    };
+    fetch(`https://kinun.onrender.com/api/cart/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(item),
+    })
+      .then(res => res.json())
+      .then(result => {
+        if (result.success) {
+          toast.success(`Product added to cart successfully`);
+        }
+        if (!result.success) {
+          toast.error(result.message);
+        }
+      })
+      .catch(err => console.error(err));
+  };
+
   return (
     <div
       className="relative shadow bg-white p-4 rounded-lg flex flex-col justify-between hover:scale-95 ease-in duration-75 border"
       data-aos="zoom-in"
     >
-      {user && (
+      {/* {user && (
         <span className="absolute right-4 z-50">
           <button onClick={() => setFavorite(!favorite)}>
             {favorite ? (
@@ -58,7 +83,7 @@ const ProductCard = ({ product }) => {
             )}
           </button>
         </span>
-      )}
+      )} */}
 
       <div>
         <Link to={`/products/${categorySlug}/${slug}`}>
@@ -66,23 +91,24 @@ const ProductCard = ({ product }) => {
         </Link>
 
         <Link to={`/products/${categorySlug}/${slug}`}>
-          <h4 className="mt-3 font-semibold text-lg hover:underline text-center">
+          <h4 className="mt-3 font-semibold text-md hover:underline text-left">
             {name}
           </h4>
         </Link>
+        <div className="[&>*:first-child]:list-disc [&>*:first-child]:ml-[18px] [&>*:first-child]:text-sm mt-2">
+          {parse(shortDescription)}
+        </div>
       </div>
+
       <div>
-        <div className="h-[1px] bg-slate-200 mt-3"></div>
+        <div className="h-[1px] bg-slate-200"></div>
         <h3 className="text-center font-bold text-xl mt-3">${price}</h3>
 
         <Button
           gradientDuoTone="purpleToBlue"
           size="xs"
           className="mx-auto mt-3"
-          onClick={() => {
-            dispatch(addToCart(product));
-            toast.success(`The product added to cart`);
-          }}
+          onClick={() => handleAddToCart(_id)}
         >
           <CgDetailsMore className="mr-2 h-5 w-5" />
           Add To Cart

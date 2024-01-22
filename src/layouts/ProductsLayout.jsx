@@ -39,11 +39,11 @@ const ProductsLayout = () => {
   const handleProductSort = e => setSortQuery(e.target.value);
 
   return (
-    <div className="bg-[#F2F4F8]">
-      <div className="container mx-auto pr-4 pl-4 lg:pl-0">
+    <main className="bg-[#F2F4F8]">
+      <div className="container mx-auto px-4">
         <SearchProduct />
       </div>
-      <div className="container mx-auto flex flex-col lg:flex-row gap-4">
+      <div className="container mx-auto flex flex-col lg:flex-row gap-4 px-4">
         <div className="basis-1/5 py-4 px-4 lg:px-0">
           {isCategoriesFetching || isCategoriesLoading ? (
             <CatNBrandSkeleton />
@@ -123,7 +123,7 @@ const ProductsLayout = () => {
             </div>
           )}
         </div>
-        <div className="basis-full p-4">
+        <div className="basis-full py-4">
           <div>
             <div className="bg-white py-2 px-2 mb-2 flex items-center justify-between rounded-lg shadow">
               <h2 className="text-lg font-bold">Products</h2>
@@ -146,7 +146,7 @@ const ProductsLayout = () => {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

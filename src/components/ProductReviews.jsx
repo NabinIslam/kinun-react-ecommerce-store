@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ProductReviews = ({ rating }) => {
   return (
     <div className="bg-[#F2F4F8] px-4 md:px-0">
@@ -9,7 +7,6 @@ const ProductReviews = ({ rating }) => {
             Reviews ({rating.count})
           </h4>
           <p> Avarage rating: {rating.rate}</p>
-        
         </div>
       </div>
     </div>

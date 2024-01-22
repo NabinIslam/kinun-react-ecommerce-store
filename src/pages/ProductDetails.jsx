@@ -1,18 +1,18 @@
-import React from 'react';
 import { Badge, Button } from 'flowbite-react';
 import { useQuery } from '@tanstack/react-query';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { useParams } from 'react-router-dom';
 import { BsCartPlus } from 'react-icons/bs';
 import ProductDescription from '../components/ProductDescription';
-import { useDispatch } from 'react-redux';
-import { addToCart } from '../features/cart/cartSlice';
 import parse from 'html-react-parser';
 import { PhotoView } from 'react-photo-view';
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthProvider';
+import toast from 'react-hot-toast';
 
 const ProductDetails = () => {
-  const dispatch = useDispatch();
   const { slug } = useParams();
+  const { user } = useContext(AuthContext);
 
   const {
     data: product = [],
@@ -26,6 +26,31 @@ const ProductDetails = () => {
       ),
   });
 
+  const handleAddToCart = productId => {
+    const item = {
+      quantity: 1,
+      product: productId,
+      user: { email: user?.email },
+    };
+    fetch(`https://kinun.onrender.com/api/cart/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(item),
+    })
+      .then(res => res.json())
+      .then(result => {
+        if (result.success) {
+          toast.success(`Product added to cart successfully`);
+        }
+        if (!result.success) {
+          toast.error(result.message);
+        }
+      })
+      .catch(err => console.error(err));
+  };
+
   if (isFetching) return <LoadingSpinner />;
   if (isLoading) return <LoadingSpinner />;
 
@@ -33,18 +58,19 @@ const ProductDetails = () => {
     <div>
       {/* <h1>{slug}</h1> */}
       <div className="container mx-auto flex flex-col md:flex-row py-10 px-4 md:px-0">
-        <div className="basis-1/2 px-24">
+        <div className="basis-full md:basis-1/2">
           <PhotoView src={product.product.image}>
             <img
-              className="lg:h-[50vh] mx-auto cursor-pointer"
+              className="w-full h-auto lg:h-full lg:w-auto mx-auto cursor-pointer"
               src={product.product.image}
               alt=""
             />
           </PhotoView>
         </div>
-        <div className="basis-1/2">
+        <div className="basis-full md:basis-1/2">
           <h3 className="text-2xl font-semibold">{product.product.name}</h3>
-          <div className="flex items-center gap-2 my-3">
+
+          <div className="flex flex-wrap items-center gap-2 my-3">
             <Badge size="lg">
               Price: $<span className="font-bold">{product.product.price}</span>
             </Badge>
@@ -71,13 +97,14 @@ const ProductDetails = () => {
             color="purple"
             size="xs"
             className="mt-3"
-            onClick={() => dispatch(addToCart(product.product))}
+            onClick={() => handleAddToCart(product.product._id)}
           >
             <BsCartPlus className="mr-2 h-5 w-5" />
             Add to cart
           </Button>
         </div>
       </div>
+
       <ProductDescription
         title={product.product.name}
         description={product.product.description}

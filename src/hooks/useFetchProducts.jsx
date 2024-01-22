@@ -8,10 +8,6 @@ function useFetchProducts(categoryQuery = '', brandQuery = '', sortQuery = '') {
   useEffect(() => {
     setLoading(true);
 
-    console.log(
-      `https://kinun.onrender.com/api/products/?category=${categoryQuery}&brand=${brandQuery}&sort=${sortQuery}`
-    );
-
     fetch(
       `https://kinun.onrender.com/api/products/?category=${categoryQuery}&brand=${brandQuery}&sort=${sortQuery}`
     )

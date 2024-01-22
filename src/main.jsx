@@ -9,10 +9,11 @@ import ScrollToTop from 'react-scroll-to-top';
 import store from './app/store';
 import { Provider } from 'react-redux';
 import ApiUrlProvider from './contexts/ApiUrlProvider';
-import { PhotoProvider, PhotoView } from 'react-photo-view';
+import { PhotoProvider } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import 'swiper/css';
 
 const queryClient = new QueryClient();
 
@@ -25,7 +26,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <ApiUrlProvider>
               <AuthProvider>
                 <Toaster
-                  position="bottom-left"
+                  position="top-right"
                   toastOptions={{
                     // Define default options
                     className: '',

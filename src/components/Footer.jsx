@@ -1,5 +1,5 @@
 import { Footer } from 'flowbite-react';
-import React from 'react';
+
 import {
   BsFacebook,
   BsInstagram,
