@@ -1,5 +1,5 @@
 import { Sidebar } from 'flowbite-react';
-import { HiShoppingBag, HiUser, HiChartPie, HiPlus } from 'react-icons/hi';
+import { HiShoppingBag, HiChartPie, HiPlus } from 'react-icons/hi';
 import { Link, Outlet } from 'react-router-dom';
 
 const AdminLayout = () => {
@@ -26,7 +26,6 @@ const AdminLayout = () => {
                   <Link to="/admin/brands">Brands</Link>
                 </Sidebar.Item>
               </Sidebar.Collapse>
-              <Sidebar.Item icon={HiUser}>Users</Sidebar.Item>
             </Sidebar.ItemGroup>
           </Sidebar.Items>
         </Sidebar>

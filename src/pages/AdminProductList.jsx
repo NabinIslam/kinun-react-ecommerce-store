@@ -3,11 +3,11 @@ import { Button, Table } from 'flowbite-react';
 import React, { useState } from 'react';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Link } from 'react-router-dom';
-import DeleteProductModal from '../modals/DeleteProductModal';
+import DeletePopup from '../modals/DeletePopup';
 
 const AdminProductList = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [productSlug, setProductSlug] = useState(null);
+  const [productId, setProductId] = useState(null);
 
   const {
     data: products = [],
@@ -36,7 +36,7 @@ const AdminProductList = () => {
             <Table.HeadCell>Action</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
-            {products.products.map(product => (
+            {products?.products?.map(product => (
               <Table.Row
                 className="bg-white dark:border-gray-700 dark:bg-gray-800"
                 key={product._id}
@@ -64,7 +64,7 @@ const AdminProductList = () => {
                     size="xs"
                     onClick={() => {
                       setOpenModal(true);
-                      setProductSlug(product.slug);
+                      setProductId(product._id);
                     }}
                   >
                     Delete
@@ -75,11 +75,19 @@ const AdminProductList = () => {
           </Table.Body>
         </Table>
       </div>
-      <DeleteProductModal
+      {/* <DeleteProductModal
         openModal={openModal}
         setOpenModal={setOpenModal}
-        productSlug={productSlug}
+        productSlug={productId}
         refetch={refetch}
+      /> */}
+      <DeletePopup
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        path={'products'}
+        id={productId}
+        refetch={refetch}
+        deletingName={'Product'}
       />
     </main>
   );

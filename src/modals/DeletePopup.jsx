@@ -2,14 +2,16 @@ import { Button, Modal } from 'flowbite-react';
 import toast from 'react-hot-toast';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 
-const DeleteCategoryModal = ({
+const DeletePopup = ({
   openModal,
   setOpenModal,
-  categorySlug,
+  path,
+  id,
   refetch,
+  deletingName,
 }) => {
-  const handleDeleteCategory = () => {
-    fetch(`https://kinun.onrender.com/api/categories/${categorySlug}`, {
+  const handleDelete = () => {
+    fetch(`https://kinun.onrender.com/api/${path}/${id}`, {
       method: 'DELETE',
     })
       .then(res => res.json())
@@ -17,7 +19,7 @@ const DeleteCategoryModal = ({
         if (data.success) {
           refetch();
           setOpenModal(false);
-          toast.success('Category deleted successfully');
+          toast.success(`${deletingName} deleted successfully`);
         }
       });
   };
@@ -29,10 +31,10 @@ const DeleteCategoryModal = ({
         <div className="text-center">
           <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
           <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-            Are you sure you want to delete this category?
+            Are you sure you want to delete this {deletingName}?
           </h3>
           <div className="flex justify-center gap-4">
-            <Button color="failure" onClick={() => handleDeleteCategory()}>
+            <Button color="failure" onClick={() => handleDelete()}>
               {"Yes, I'm sure"}
             </Button>
             <Button color="gray" onClick={() => setOpenModal(false)}>
@@ -45,4 +47,4 @@ const DeleteCategoryModal = ({
   );
 };
 
-export default DeleteCategoryModal;
+export default DeletePopup;

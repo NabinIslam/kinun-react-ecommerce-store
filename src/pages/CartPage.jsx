@@ -10,12 +10,7 @@ import { Button, Table } from 'flowbite-react';
 const CartPage = () => {
   const { user } = useContext(AuthContext);
 
-  const {
-    data: cart = [],
-    isFetching,
-    isLoading,
-    refetch,
-  } = useQuery({
+  const { data: cart = [], refetch } = useQuery({
     queryKey: ['cart'],
     queryFn: () =>
       fetch(`https://kinun.onrender.com/api/cart?user=${user?.email}`).then(
@@ -111,16 +106,6 @@ const CartPage = () => {
 
     return subtotal;
   };
-
-  // if (cart.length === 0)
-  //   return (
-  //     <main className="py-20">
-  //       <div className="container mx-auto py-10 text-center font-semibold text-2xl">
-  //         <h1>Your cart is empty</h1>
-  //         <p>😔</p>
-  //       </div>
-  //     </main>
-  //   );
 
   return (
     <main>

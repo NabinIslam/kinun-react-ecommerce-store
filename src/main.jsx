@@ -13,7 +13,7 @@ import { PhotoProvider } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import 'swiper/css';
+import 'react-multi-carousel/lib/styles.css';
 
 const queryClient = new QueryClient();
 

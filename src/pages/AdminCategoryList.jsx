@@ -2,16 +2,16 @@ import { useQuery } from '@tanstack/react-query';
 import { Button, Table } from 'flowbite-react';
 import React, { useState } from 'react';
 import LoadingSpinner from '../components/LoadingSpinner';
-import DeleteCategoryModal from '../modals/DeleteCategoryModal';
 import EditCategoryModal from '../modals/EditCategoryModal';
 import { HiPlus } from 'react-icons/hi';
 import UploadCategoryModal from '../modals/UploadCategoryModal';
+import DeletePopup from '../modals/DeletePopup';
 
 const AdminCategoryList = () => {
   const [openModal, setOpenModal] = useState(false);
   const [openEditCategoryModal, setOpenEditCategoryModal] = useState(false);
   const [openUploadCategoryModal, setOpenUploadCategoryModal] = useState(false);
-  const [categorySlug, setCategorySlug] = useState(null);
+  const [categoryId, setCategoryId] = useState(null);
   const [categoryData, setCategoryData] = useState(null);
 
   const {
@@ -77,7 +77,7 @@ const AdminCategoryList = () => {
                     size="xs"
                     onClick={() => {
                       setOpenModal(true);
-                      setCategorySlug(category.slug);
+                      setCategoryId(category._id);
                     }}
                   >
                     Delete
@@ -99,11 +99,13 @@ const AdminCategoryList = () => {
         categoryData={categoryData}
         refetch={refetch}
       />
-      <DeleteCategoryModal
+      <DeletePopup
         openModal={openModal}
         setOpenModal={setOpenModal}
-        categorySlug={categorySlug}
+        path={'categories'}
+        id={categoryId}
         refetch={refetch}
+        deletingName={'Category'}
       />
     </main>
   );

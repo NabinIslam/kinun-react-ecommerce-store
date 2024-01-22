@@ -2,34 +2,32 @@ import { useQuery } from '@tanstack/react-query';
 import { Button, Table } from 'flowbite-react';
 import React, { useState } from 'react';
 import LoadingSpinner from '../components/LoadingSpinner';
-import DeleteCategoryModal from '../modals/DeleteCategoryModal';
 import EditCategoryModal from '../modals/EditCategoryModal';
 import { HiPlus } from 'react-icons/hi';
 import UploadCategoryModal from '../modals/UploadCategoryModal';
 import UploadBrandModal from '../modals/UploadBrandModal';
+import DeletePopup from '../modals/DeletePopup';
 
 const AdminBrandList = () => {
   const [openModal, setOpenModal] = useState(false);
   const [openEditCategoryModal, setOpenEditCategoryModal] = useState(false);
   const [openUploadCategoryModal, setOpenUploadCategoryModal] = useState(false);
   const [openUploadBrandModal, setOpenUploadBrandModal] = useState(false);
-  const [categorySlug, setCategorySlug] = useState(null);
+  const [brandId, setBrandId] = useState(null);
   const [categoryData, setCategoryData] = useState(null);
 
   const {
-    data: categories = [],
+    data: brands = [],
     isFetching,
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ['categories'],
+    queryKey: ['brands'],
     queryFn: () =>
-      fetch('https://kinun.onrender.com/api/categories').then(res =>
-        res.json()
-      ),
+      fetch('https://kinun.onrender.com/api/brands').then(res => res.json()),
   });
 
-  //   if (isLoading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <main>
@@ -40,23 +38,23 @@ const AdminBrandList = () => {
           <HiPlus className="ml-2 h-5 w-5" />
         </Button>
       </div>
-      {/* <h4 className="font-bold text-2xl mb-10">Categories</h4>
+      <h4 className="font-bold text-2xl mb-10">Brands</h4>
       <div>
         <Table hoverable>
           <Table.Head>
-            <Table.HeadCell>Category name</Table.HeadCell>
+            <Table.HeadCell>Brand name</Table.HeadCell>
 
             <Table.HeadCell>Action</Table.HeadCell>
             <Table.HeadCell>Action</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
-            {categories.categories.map(category => (
+            {brands?.brands?.map(brand => (
               <Table.Row
                 className="bg-white dark:border-gray-700 dark:bg-gray-800"
-                key={category._id}
+                key={brand._id}
               >
                 <Table.Cell>
-                  <span className="font-semibold">{category.name}</span>
+                  <span className="font-semibold">{brand.name}</span>
                 </Table.Cell>
 
                 <Table.Cell>
@@ -66,7 +64,7 @@ const AdminBrandList = () => {
                     size="xs"
                     onClick={() => {
                       setOpenEditCategoryModal(true);
-                      setCategoryData(category);
+                      setCategoryData(brand);
                     }}
                   >
                     Edit
@@ -79,7 +77,7 @@ const AdminBrandList = () => {
                     size="xs"
                     onClick={() => {
                       setOpenModal(true);
-                      setCategorySlug(category.slug);
+                      setBrandId(brand._id);
                     }}
                   >
                     Delete
@@ -101,12 +99,14 @@ const AdminBrandList = () => {
         categoryData={categoryData}
         refetch={refetch}
       />
-      <DeleteCategoryModal
+      <DeletePopup
         openModal={openModal}
         setOpenModal={setOpenModal}
-        categorySlug={categorySlug}
+        path={'brands'}
+        id={brandId}
         refetch={refetch}
-      /> */}
+        deletingName={'Brand'}
+      />
       <UploadBrandModal
         openUploadBrandModal={openUploadBrandModal}
         setOpenUploadBrandModal={setOpenUploadBrandModal}
