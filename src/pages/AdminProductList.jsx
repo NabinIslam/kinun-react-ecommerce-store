@@ -11,7 +11,6 @@ const AdminProductList = () => {
 
   const {
     data: products = [],
-    isFetching,
     isLoading,
     refetch,
   } = useQuery({
@@ -33,7 +32,6 @@ const AdminProductList = () => {
             <Table.HeadCell>Category</Table.HeadCell>
             <Table.HeadCell>Price</Table.HeadCell>
             <Table.HeadCell>Action</Table.HeadCell>
-            <Table.HeadCell>Action</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
             {products?.products?.map(product => (
@@ -52,11 +50,7 @@ const AdminProductList = () => {
 
                 <Table.Cell>{product.category.name}</Table.Cell>
                 <Table.Cell>${product.price}</Table.Cell>
-                <Table.Cell>
-                  <Button className="text-white" color="warning" size="xs">
-                    Edit
-                  </Button>
-                </Table.Cell>
+
                 <Table.Cell>
                   <Button
                     className="text-white"
@@ -75,12 +69,7 @@ const AdminProductList = () => {
           </Table.Body>
         </Table>
       </div>
-      {/* <DeleteProductModal
-        openModal={openModal}
-        setOpenModal={setOpenModal}
-        productSlug={productId}
-        refetch={refetch}
-      /> */}
+
       <DeletePopup
         openModal={openModal}
         setOpenModal={setOpenModal}
