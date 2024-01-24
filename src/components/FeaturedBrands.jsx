@@ -27,7 +27,7 @@ const FeaturedBrands = () => {
           responsive={responsive}
           autoPlay
           arrows={false}
-          autoPlaySpeed={2000}
+          autoPlaySpeed={1000}
           infinite
         >
           <div className="h-24 m-4 flex items-center justify-center">
@@ -43,13 +43,10 @@ const FeaturedBrands = () => {
             <img className="h-auto w-28" src="/a4tech.png" alt="" />
           </div>
           <div className="h-24 m-4 flex items-center justify-center">
-            <img className="h-auto w-28" src="/a4tech.png" alt="" />
+            <img className="h-auto w-28" src="/logitech.png" alt="" />
           </div>
           <div className="h-24 m-4 flex items-center justify-center">
-            <img className="h-auto w-28" src="/a4tech.png" alt="" />
-          </div>
-          <div className="h-24 m-4 flex items-center justify-center">
-            <img className="h-auto w-28" src="/a4tech.png" alt="" />
+            <img className="h-auto w-28" src="/edifier.png" alt="" />
           </div>
         </Carousel>
       </div>
