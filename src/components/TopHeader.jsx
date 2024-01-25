@@ -36,6 +36,7 @@ const TopHeader = () => {
             </p>
           </a>
         </div>
+
         <div className="flex items-center gap-2">
           {user ? (
             <Link className="text-xs" onClick={handleLogout}>
