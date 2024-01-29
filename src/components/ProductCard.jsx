@@ -44,6 +44,8 @@ const ProductCard = ({ product }) => {
   };
 
   const handleAddToCart = productId => {
+    if (!user) return toast.error(`Please login to purchase the product`);
+
     const item = {
       quantity: 1,
       product: productId,

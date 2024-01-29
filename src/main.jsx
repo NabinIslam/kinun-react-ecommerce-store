@@ -26,7 +26,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <ApiUrlProvider>
               <AuthProvider>
                 <Toaster
-                  position="top-right"
+                  position="bottom-center"
                   toastOptions={{
                     // Define default options
                     className: '',
