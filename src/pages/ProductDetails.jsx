@@ -21,9 +21,9 @@ const ProductDetails = () => {
   } = useQuery({
     queryKey: ['product'],
     queryFn: () =>
-      fetch(`https://kinun.onrender.com/api/products/${slug}`).then(res =>
-        res.json()
-      ),
+      fetch(
+        `https://kinun-react-ecommerce-server-production.up.railway.app/api/products/${slug}`
+      ).then(res => res.json()),
   });
 
   const handleAddToCart = productId => {
@@ -32,13 +32,16 @@ const ProductDetails = () => {
       product: productId,
       user: { email: user?.email },
     };
-    fetch(`https://kinun.onrender.com/api/cart/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(item),
-    })
+    fetch(
+      `https://kinun-react-ecommerce-server-production.up.railway.app/api/cart/`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(item),
+      }
+    )
       .then(res => res.json())
       .then(result => {
         if (result.success) {

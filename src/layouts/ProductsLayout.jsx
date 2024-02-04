@@ -18,9 +18,9 @@ const ProductsLayout = () => {
   } = useQuery({
     queryKey: ['categories'],
     queryFn: () =>
-      fetch('https://kinun.onrender.com/api/categories').then(res =>
-        res.json()
-      ),
+      fetch(
+        'https://kinun-react-ecommerce-server-production.up.railway.app/api/categories'
+      ).then(res => res.json()),
   });
   const {
     data: brands = [],
@@ -29,7 +29,9 @@ const ProductsLayout = () => {
   } = useQuery({
     queryKey: ['brands'],
     queryFn: () =>
-      fetch('https://kinun.onrender.com/api/brands').then(res => res.json()),
+      fetch(
+        'https://kinun-react-ecommerce-server-production.up.railway.app/api/brands'
+      ).then(res => res.json()),
   });
 
   const handleCategory = e => setCategoryQuery(e.target.value);

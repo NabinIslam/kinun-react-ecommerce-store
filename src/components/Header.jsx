@@ -2,15 +2,22 @@ import { Avatar, Badge, Dropdown, Navbar } from 'flowbite-react';
 import React, { useContext } from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
-import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { FaShoppingCart } from 'react-icons/fa';
-
 import toast from 'react-hot-toast';
-
+import { useQuery } from '@tanstack/react-query';
+// yurwWVTLhn20sGDT
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
-
   const navigate = useNavigate();
+
+  const { data: cart = [] } = useQuery({
+    queryKey: ['cart'],
+    queryFn: () =>
+      fetch(
+        `https://kinun-react-ecommerce-server-production.up.railway.app/api/cart?user=${user?.email}`
+      ).then(res => res.json()),
+    refetchOnMount: true,
+  });
 
   const handleLogout = () => {
     logOut()
@@ -67,10 +74,13 @@ const Header = () => {
               <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
             </Dropdown>
             <Link
-              className="flex items-center gap-1 hover:bg-slate-200 p-1 rounded"
+              className="relative flex items-center gap-1 hover:bg-slate-200 p-1 rounded"
               to="/cart"
             >
-              <FaShoppingCart className="text-2xl" />
+              <span className="absolute top-0 right-0 bg-purple-600 text-white rounded-full px-[5px] text-[10px]">
+                {cart?.cart?.length}
+              </span>
+              <FaShoppingCart className="text-[30px]" />
             </Link>
             <Navbar.Toggle className="ml-2" />
           </div>

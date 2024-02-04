@@ -11,13 +11,16 @@ const UploadCategoryModal = ({
   const { handleSubmit, register, reset } = useForm();
 
   const handleUploadCategory = data => {
-    fetch(`https://kinun.onrender.com/api/categories`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
+    fetch(
+      `https://kinun-react-ecommerce-server-production.up.railway.app/api/categories`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }
+    )
       .then(res => res.json())
       .then(data => {
         if (data.success) {

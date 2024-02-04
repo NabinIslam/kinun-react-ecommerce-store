@@ -9,7 +9,7 @@ function useFetchProducts(categoryQuery = '', brandQuery = '', sortQuery = '') {
     setLoading(true);
 
     fetch(
-      `https://kinun.onrender.com/api/products/?category=${categoryQuery}&brand=${brandQuery}&sort=${sortQuery}`
+      `https://kinun-react-ecommerce-server-production.up.railway.app/api/products/?category=${categoryQuery}&brand=${brandQuery}&sort=${sortQuery}`
     )
       .then(res => res.json())
       .then(data => setData(data))
@@ -20,7 +20,7 @@ function useFetchProducts(categoryQuery = '', brandQuery = '', sortQuery = '') {
   const refetch = () => {
     setLoading(true);
     fetch(
-      `https://kinun.onrender.com/api/products/?category=${categoryQuery}&brand=${brandQuery}&sort=${sortQuery}`
+      `https://kinun-react-ecommerce-server-production.up.railway.app/api/products/?category=${categoryQuery}&brand=${brandQuery}&sort=${sortQuery}`
     )
       .then(res => res.json())
       .then(data => setData(data))

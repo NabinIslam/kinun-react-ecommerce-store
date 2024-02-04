@@ -12,13 +12,16 @@ const EditCategoryModal = ({
   const { handleSubmit, register } = useForm();
 
   const handleEditCategory = data => {
-    fetch(`https://kinun.onrender.com/api/categories/${categoryData?.slug}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
+    fetch(
+      `https://kinun-react-ecommerce-server-production.up.railway.app/api/categories/${categoryData?.slug}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }
+    )
       .then(res => res.json())
       .then(data => {
         if (data.success) {

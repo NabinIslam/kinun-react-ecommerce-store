@@ -8,13 +8,16 @@ const initialState = {
 };
 
 export const addToCartAsync = createAsyncThunk('cart/addToCart', async item => {
-  const response = await fetch(`https://kinun.onrender.com/api/cart/`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(item),
-  });
+  const response = await fetch(
+    `https://kinun-react-ecommerce-server-production.up.railway.app/api/cart/`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(item),
+    }
+  );
   const data = response.json();
 
   if (data.success) {

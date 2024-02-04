@@ -13,9 +13,9 @@ const CartPage = () => {
   const { data: cart = [], refetch } = useQuery({
     queryKey: ['cart'],
     queryFn: () =>
-      fetch(`https://kinun.onrender.com/api/cart?user=${user?.email}`).then(
-        res => res.json()
-      ),
+      fetch(
+        `https://kinun-react-ecommerce-server-production.up.railway.app/api/cart?user=${user?.email}`
+      ).then(res => res.json()),
   });
 
   const handleIncreaseQuantity = item => {
@@ -25,13 +25,16 @@ const CartPage = () => {
       user: { email: user?.email },
     };
 
-    fetch(`https://kinun.onrender.com/api/cart/${item._id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updatedItem),
-    })
+    fetch(
+      `https://kinun-react-ecommerce-server-production.up.railway.app/api/cart/${item._id}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedItem),
+      }
+    )
       .then(res => res.json())
       .then(result => {
         if (result.success) {
@@ -50,13 +53,16 @@ const CartPage = () => {
       user: { email: user?.email },
     };
 
-    fetch(`https://kinun.onrender.com/api/cart/${item._id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updatedItem),
-    })
+    fetch(
+      `https://kinun-react-ecommerce-server-production.up.railway.app/api/cart/${item._id}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedItem),
+      }
+    )
       .then(res => res.json())
       .then(result => {
         if (result.success) {
@@ -69,9 +75,12 @@ const CartPage = () => {
   };
 
   const handleRemoveFromCart = itemId => {
-    fetch(`https://kinun.onrender.com/api/cart/${itemId}`, {
-      method: 'DELETE',
-    })
+    fetch(
+      `https://kinun-react-ecommerce-server-production.up.railway.app/api/cart/${itemId}`,
+      {
+        method: 'DELETE',
+      }
+    )
       .then(res => res.json())
       .then(result => {
         if (result.success) {
@@ -81,9 +90,12 @@ const CartPage = () => {
   };
 
   const handleClearCart = () => {
-    fetch(`https://kinun.onrender.com/api/cart?user=${user?.email}`, {
-      method: 'DELETE',
-    })
+    fetch(
+      `https://kinun-react-ecommerce-server-production.up.railway.app/api/cart?user=${user?.email}`,
+      {
+        method: 'DELETE',
+      }
+    )
       .then(res => res.json())
       .then(result => {
         if (result.success) {

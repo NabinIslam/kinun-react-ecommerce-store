@@ -21,9 +21,9 @@ const AddProduct = () => {
   } = useQuery({
     queryKey: ['categories'],
     queryFn: () =>
-      fetch('https://kinun.onrender.com/api/categories').then(res =>
-        res.json()
-      ),
+      fetch(
+        'https://kinun-react-ecommerce-server-production.up.railway.app/api/categories'
+      ).then(res => res.json()),
   });
 
   const {
@@ -33,7 +33,9 @@ const AddProduct = () => {
   } = useQuery({
     queryKey: ['brands'],
     queryFn: () =>
-      fetch(`https://kinun.onrender.com/api/brands`).then(res => res.json()),
+      fetch(
+        `https://kinun-react-ecommerce-server-production.up.railway.app/api/brands`
+      ).then(res => res.json()),
   });
 
   const imgHostApiKey = import.meta.env.VITE_APP_IMAGEBB_API_KEY;
@@ -58,13 +60,16 @@ const AddProduct = () => {
           brand: data.brand,
         };
 
-        fetch(`https://kinun.onrender.com/api/products`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(product),
-        })
+        fetch(
+          `https://kinun-react-ecommerce-server-production.up.railway.app/api/products`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(product),
+          }
+        )
           .then(res => res.json())
           .then(data => {
             if (data.success) {

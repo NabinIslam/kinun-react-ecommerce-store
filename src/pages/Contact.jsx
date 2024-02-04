@@ -11,11 +11,14 @@ const Contact = () => {
   usePageTitle('Contact');
 
   const handleContact = data => {
-    fetch('https://kinun.onrender.com/api/contacts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    })
+    fetch(
+      'https://kinun-react-ecommerce-server-production.up.railway.app/api/contacts',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      }
+    )
       .then(res => res.json())
       .then(result => {
         if (result.contact) {

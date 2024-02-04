@@ -13,7 +13,9 @@ const Dashboard = () => {
   } = useQuery({
     queryKey: ['products'],
     queryFn: () =>
-      fetch('https://kinun.onrender.com/api/products').then(res => res.json()),
+      fetch(
+        'https://kinun-react-ecommerce-server-production.up.railway.app/api/products'
+      ).then(res => res.json()),
   });
 
   //categories fetching
@@ -24,9 +26,9 @@ const Dashboard = () => {
   } = useQuery({
     queryKey: ['categories'],
     queryFn: () =>
-      fetch('https://kinun.onrender.com/api/categories').then(res =>
-        res.json()
-      ),
+      fetch(
+        'https://kinun-react-ecommerce-server-production.up.railway.app/api/categories'
+      ).then(res => res.json()),
   });
 
   //brands fetching
@@ -37,7 +39,9 @@ const Dashboard = () => {
   } = useQuery({
     queryKey: ['brands'],
     queryFn: () =>
-      fetch('https://kinun.onrender.com/api/brands').then(res => res.json()),
+      fetch(
+        'https://kinun-react-ecommerce-server-production.up.railway.app/api/brands'
+      ).then(res => res.json()),
   });
 
   return (

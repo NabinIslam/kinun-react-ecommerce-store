@@ -16,7 +16,9 @@ const AdminProductList = () => {
   } = useQuery({
     queryKey: ['products'],
     queryFn: () =>
-      fetch('https://kinun.onrender.com/api/products').then(res => res.json()),
+      fetch(
+        'https://kinun-react-ecommerce-server-production.up.railway.app/api/products'
+      ).then(res => res.json()),
   });
 
   if (isLoading) return <LoadingSpinner />;

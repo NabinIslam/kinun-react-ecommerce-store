@@ -6,7 +6,7 @@ export const ApiUrlContext = createContext();
 
 const ApiUrlProvider = ({ children }) => {
   const [productApi, setProductApi] = useState(
-    `https://kinun.onrender.com/api/products/`
+    `https://kinun-react-ecommerce-server-production.up.railway.app/api/products/`
   );
   const [categoryQuery, setCategoryQuery] = useState('');
   const [brandQuery, setBrandQuery] = useState('');

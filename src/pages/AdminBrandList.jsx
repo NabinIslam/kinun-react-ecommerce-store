@@ -24,7 +24,9 @@ const AdminBrandList = () => {
   } = useQuery({
     queryKey: ['brands'],
     queryFn: () =>
-      fetch('https://kinun.onrender.com/api/brands').then(res => res.json()),
+      fetch(
+        'https://kinun-react-ecommerce-server-production.up.railway.app/api/brands'
+      ).then(res => res.json()),
   });
 
   if (isLoading) return <LoadingSpinner />;
