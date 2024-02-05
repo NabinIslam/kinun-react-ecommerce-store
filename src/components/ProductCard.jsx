@@ -77,10 +77,7 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <div
-      className="relative shadow bg-white p-4 rounded-lg flex flex-col justify-between hover:scale-95 ease-in duration-75 border"
-      data-aos="zoom-in"
-    >
+    <div className="relative shadow bg-white p-4 rounded-lg flex flex-col justify-between hover:scale-95 ease-in duration-75 border">
       {/* {user && (
         <span className="absolute right-4 z-50">
           <button onClick={() => setFavorite(!favorite)}>
