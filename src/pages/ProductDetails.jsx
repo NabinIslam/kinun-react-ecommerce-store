@@ -9,10 +9,16 @@ import { PhotoView } from 'react-photo-view';
 import { useContext } from 'react';
 import { AuthContext } from '../contexts/AuthProvider';
 import toast from 'react-hot-toast';
+import { addToCartAsync, selectItems } from '../features/cart/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import Skeleton from 'react-loading-skeleton';
+import ProductDetailsSkeletion from '../loadingSkeletons/ProductDetailsSkeletion';
 
 const ProductDetails = () => {
   const { slug } = useParams();
   const { user } = useContext(AuthContext);
+  const items = useSelector(selectItems);
+  const dispatch = useDispatch();
 
   const {
     data: product = [],
@@ -52,10 +58,21 @@ const ProductDetails = () => {
         }
       })
       .catch(err => console.error(err));
+
+    // if (items.findIndex(item => item.product?._id === productId) < 0) {
+    //   console.log({ items, product });
+    //   const newItem = {
+    //     quantity: 1,
+    //     product: productId,
+    //     user: { email: user?.email },
+    //   };
+    //   dispatch(addToCartAsync({ item: newItem }));
+    // } else {
+    //   toast.error('This product is already in cart');
+    // }
   };
 
-  if (isFetching) return <LoadingSpinner />;
-  if (isLoading) return <LoadingSpinner />;
+  if (isFetching || isLoading) return <ProductDetailsSkeletion />;
 
   return (
     <div>

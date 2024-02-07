@@ -77,9 +77,9 @@ const Header = () => {
               className="relative flex items-center gap-1 hover:bg-slate-200 p-1 rounded"
               to="/cart"
             >
-              <span className="absolute top-0 right-0 bg-purple-600 text-white rounded-full px-[5px] text-[10px]">
+              {/* <span className="absolute top-0 right-0 bg-purple-600 text-white rounded-full px-[5px] text-[10px]">
                 {cart?.cart?.length}
-              </span>
+              </span> */}
               <FaShoppingCart className="text-[30px]" />
             </Link>
             <Navbar.Toggle className="ml-2" />
