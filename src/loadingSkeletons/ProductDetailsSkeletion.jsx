@@ -5,10 +5,10 @@ const ProductDetailsSkeletion = () => {
     <div>
       {/* <h1>{slug}</h1> */}
       <div className="container mx-auto flex flex-col md:flex-row py-10 px-4 md:px-0">
-        <div className="basis-1/2 px-24">
-          <Skeleton height={400} borderRadius={8} />
+        <div className="basis-full lg:basis-1/2 px-24">
+          <Skeleton className="w-full" height={400} borderRadius={8} />
         </div>
-        <div className="basis-1/2">
+        <div className="basis-full lg:basis-1/2">
           <Skeleton height={30} />
 
           <div className="flex items-center gap-2 my-3">
