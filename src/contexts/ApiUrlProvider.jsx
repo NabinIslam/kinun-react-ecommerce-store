@@ -12,7 +12,7 @@ const ApiUrlProvider = ({ children }) => {
   const [brandQuery, setBrandQuery] = useState('');
   const [sortQuery, setSortQuery] = useState('');
 
-  const { data, loading } = useFetchProducts(
+  const { data, isLoading } = useFetchProducts(
     categoryQuery,
     brandQuery,
     sortQuery
@@ -36,7 +36,7 @@ const ApiUrlProvider = ({ children }) => {
     sortQuery,
     setSortQuery,
     data,
-    loading,
+    isLoading,
   };
 
   return (

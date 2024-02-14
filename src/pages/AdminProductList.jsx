@@ -4,9 +4,11 @@ import React, { useState } from 'react';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Link } from 'react-router-dom';
 import DeletePopup from '../modals/DeletePopup';
+import UpdateProductModal from '../modals/UpdateProductModal';
 
 const AdminProductList = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [openUpdateProductModal, setOpenUpdateProductModal] = useState(false);
   const [productId, setProductId] = useState(null);
 
   const {
@@ -34,6 +36,7 @@ const AdminProductList = () => {
             <Table.HeadCell>Category</Table.HeadCell>
             <Table.HeadCell>Price</Table.HeadCell>
             <Table.HeadCell>Action</Table.HeadCell>
+            <Table.HeadCell>Action</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
             {products?.products?.map(product => (
@@ -54,6 +57,13 @@ const AdminProductList = () => {
                 <Table.Cell>${product.price}</Table.Cell>
 
                 <Table.Cell>
+                  <Link to={`/product/update/${product._id}`}>
+                    <Button className="text-white" color="warning" size="xs">
+                      Update
+                    </Button>
+                  </Link>
+                </Table.Cell>
+                <Table.Cell>
                   <Button
                     className="text-white"
                     color="failure"
@@ -71,6 +81,13 @@ const AdminProductList = () => {
           </Table.Body>
         </Table>
       </div>
+
+      <UpdateProductModal
+        openUpdateProductModal={openUpdateProductModal}
+        setOpenUpdateProductModal={setOpenUpdateProductModal}
+        id={productId}
+        refetch={refetch}
+      />
 
       <DeletePopup
         openModal={openModal}

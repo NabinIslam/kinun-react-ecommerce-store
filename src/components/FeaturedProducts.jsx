@@ -5,7 +5,7 @@ import ProductCard from './ProductCard';
 import { Button } from 'flowbite-react';
 
 const FeaturedProducts = () => {
-  const { data, loading } = useFetchProducts();
+  const { data, isLoading } = useFetchProducts();
   return (
     <section className="py-24">
       <div className="container mx-auto px-4">
@@ -13,7 +13,7 @@ const FeaturedProducts = () => {
           Featured Products
         </h2>
 
-        {loading ? (
+        {isLoading ? (
           <FeaturedProductsSkeleton />
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">

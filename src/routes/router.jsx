@@ -17,6 +17,7 @@ import AdminRoute from './AdminRoute';
 import Dashboard from '../pages/Dashboard';
 import AdminCategoryList from '../pages/AdminCategoryList';
 import AdminBrandList from '../pages/AdminBrandList';
+import UpdateProduct from '../pages/UpdateProduct';
 
 const router = createBrowserRouter([
   {
@@ -119,6 +120,14 @@ const router = createBrowserRouter([
             ),
           },
         ],
+      },
+      {
+        path: '/product/update/:id',
+        element: (
+          <AdminRoute>
+            <UpdateProduct />
+          </AdminRoute>
+        ),
       },
     ],
   },

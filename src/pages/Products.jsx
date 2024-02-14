@@ -6,20 +6,10 @@ import usePageTitle from '../hooks/usePageTitle';
 import ProductSkeleton from '../loadingSkeletons/ProductSkeleton';
 
 const Products = () => {
-  const { data, loading } = useContext(ApiUrlContext);
+  const { data, isLoading } = useContext(ApiUrlContext);
   usePageTitle('Products');
 
-  // const {
-  //   data: products = [],
-  //   isFetching,
-  //   isLoading,
-  // } = useQuery({
-  //   queryKey: ['products'],
-  //   queryFn: () => fetch(productApi).then(res => res.json()),
-  // });
-
-  // if (isFetching) return <LoadingSpinner />;
-  if (loading) return <ProductSkeleton />;
+  if (isLoading) return <ProductSkeleton />;
 
   if (data?.products?.length === 0)
     return (
