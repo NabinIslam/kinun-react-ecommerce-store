@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Button, FileInput, Label, Select, TextInput } from 'flowbite-react';
 import ReactQuill from 'react-quill';
 import { useForm } from 'react-hook-form';
 import { useQuery } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
 
 const UpdateProduct = () => {
   const { id } = useParams();
@@ -12,13 +13,14 @@ const UpdateProduct = () => {
   const [description, setDescription] = useState('');
   const [shortDescription, setShortDescription] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const {
     data: product = [],
     isFetching: isFetchingProduct,
     isLoading: isLoadingProduct,
   } = useQuery({
-    queryKey: ['product'],
+    queryKey: [id],
     queryFn: () =>
       fetch(
         `https://kinun-react-ecommerce-server-production.up.railway.app/api/products/id/${id}`
@@ -51,7 +53,37 @@ const UpdateProduct = () => {
       ).then(res => res.json()),
   });
 
-  const handleUpdateProduct = () => {};
+  const handleUpdateProduct = data => {
+    const updatedProduct = {
+      name: data.name,
+      description: description ? description : product.product?.description,
+      shortDescription: shortDescription
+        ? shortDescription
+        : product.product?.shortDescription,
+      price: data.price,
+      image: product.product?.image,
+      category: data.category,
+      brand: data.brand,
+    };
+
+    fetch(
+      `https://kinun-react-ecommerce-server-production.up.railway.app/api/products/update/${id}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedProduct),
+      }
+    )
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          navigate('/admin/products');
+          toast.success(`Successfully updated the product`);
+        }
+      });
+  };
 
   if (
     isFetchingProduct ||
@@ -65,7 +97,8 @@ const UpdateProduct = () => {
 
   return (
     <main>
-      <div className="container mx-auto">
+      <div className="container mx-auto px-4 py-10">
+        <h2 className="font-bold text-2xl mb-7">Edit product</h2>
         <form action="" onSubmit={handleSubmit(handleUpdateProduct)}>
           <div>
             <div className="mb-2 block">
@@ -75,7 +108,7 @@ const UpdateProduct = () => {
               {...register('name')}
               type="text"
               sizing="md"
-              defaultValue={product?.product?.name}
+              defaultValue={product.product?.name}
               required
             />
           </div>
@@ -86,7 +119,7 @@ const UpdateProduct = () => {
             <ReactQuill
               className="h-48 block"
               theme="snow"
-              defaultValue={product?.product?.shortDescription}
+              defaultValue={product.product?.shortDescription}
               onChange={setShortDescription}
             />
           </div>
@@ -97,7 +130,7 @@ const UpdateProduct = () => {
             <ReactQuill
               className="h-48 block"
               theme="snow"
-              defaultValue={product?.product?.description}
+              defaultValue={product.product?.description}
               onChange={setDescription}
             />
           </div>
@@ -109,16 +142,16 @@ const UpdateProduct = () => {
               {...register('price')}
               type="number"
               sizing="md"
-              defaultValue={product?.product?.price}
+              defaultValue={product.product?.price}
               required
             />
           </div>
-          <div>
+          {/* <div>
             <div className="mb-2 block">
               <Label htmlFor="image" value="Image" />
             </div>
             <FileInput {...register('image')} />
-          </div>
+          </div> */}
           <div>
             <div className="mb-2 block">
               <Label htmlFor="select" value="Category" />
@@ -126,7 +159,15 @@ const UpdateProduct = () => {
 
             <Select {...register('category')}>
               {categories?.categories?.map(category => (
-                <option value={category._id} key={category._id}>
+                <option
+                  value={category._id}
+                  key={category._id}
+                  selected={
+                    product.product?.category?._id === category._id
+                      ? true
+                      : false
+                  }
+                >
                   {category.name}
                 </option>
               ))}
@@ -139,7 +180,13 @@ const UpdateProduct = () => {
 
             <Select {...register('brand')}>
               {brands?.brands?.map(brand => (
-                <option value={brand._id} key={brand._id}>
+                <option
+                  value={brand._id}
+                  key={brand._id}
+                  selected={
+                    product.product?.brand?._id === brand._id ? true : false
+                  }
+                >
                   {brand.name}
                 </option>
               ))}
