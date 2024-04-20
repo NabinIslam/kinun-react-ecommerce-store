@@ -29,9 +29,9 @@ const UpdateProductModal = ({
   } = useQuery({
     queryKey: ['product'],
     queryFn: () =>
-      fetch(
-        `https://kinun-react-ecommerce-server-production.up.railway.app/api/products/id/${id}`
-      ).then(res => res.json()),
+      fetch(`https://kinun.onrender.com/api/products/id/${id}`).then(res =>
+        res.json()
+      ),
   });
 
   const {
@@ -41,9 +41,9 @@ const UpdateProductModal = ({
   } = useQuery({
     queryKey: ['categories'],
     queryFn: () =>
-      fetch(
-        'https://kinun-react-ecommerce-server-production.up.railway.app/api/categories'
-      ).then(res => res.json()),
+      fetch('https://kinun.onrender.com/api/categories').then(res =>
+        res.json()
+      ),
   });
 
   const {
@@ -53,9 +53,7 @@ const UpdateProductModal = ({
   } = useQuery({
     queryKey: ['brands'],
     queryFn: () =>
-      fetch(
-        `https://kinun-react-ecommerce-server-production.up.railway.app/api/brands`
-      ).then(res => res.json()),
+      fetch(`https://kinun.onrender.com/api/brands`).then(res => res.json()),
   });
 
   const handleUpdateProduct = () => {};

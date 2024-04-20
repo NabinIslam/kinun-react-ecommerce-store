@@ -6,10 +6,11 @@ import GoogleButton from 'react-google-button';
 import { AuthContext } from '../contexts/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import axios from 'axios';
+import PageTitle from '../components/PageTitle';
 
 const Register = () => {
-  const { createUser, updateUser, googleSignIn } =
-    useContext(AuthContext);
+  const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
   const { handleSubmit, register } = useForm();
   const location = useLocation();
   const navigate = useNavigate();
@@ -39,6 +40,7 @@ const Register = () => {
 
   return (
     <div className="h-screen">
+      <PageTitle titleName={'Register'} />
       <div className="container mx-auto py-20 px-4 lg:px-0">
         <h2 className="font-bold text-center text-4xl mb-10 text-transparent bg-clip-text bg-gradient-to-r from-purple-700 to-blue-500 pb-1">
           Register

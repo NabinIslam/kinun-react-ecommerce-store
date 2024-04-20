@@ -11,16 +11,13 @@ const UploadBrandModal = ({
   const { handleSubmit, register, reset } = useForm();
 
   const handleUploadBrand = data => {
-    fetch(
-      `https://kinun-react-ecommerce-server-production.up.railway.app/api/brands`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      }
-    )
+    fetch(`https://kinun.onrender.com/api/brands`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
       .then(res => res.json())
       .then(data => {
         if (data.success) {

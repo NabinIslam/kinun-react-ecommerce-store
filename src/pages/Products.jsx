@@ -4,10 +4,10 @@ import ProductCard from '../components/ProductCard';
 import { ApiUrlContext } from '../contexts/ApiUrlProvider';
 import usePageTitle from '../hooks/usePageTitle';
 import ProductSkeleton from '../loadingSkeletons/ProductSkeleton';
+import PageTitle from '../components/PageTitle';
 
 const Products = () => {
   const { data, isLoading } = useContext(ApiUrlContext);
-  usePageTitle('Products');
 
   if (isLoading) return <ProductSkeleton />;
 
@@ -22,6 +22,7 @@ const Products = () => {
 
   return (
     <main className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      <PageTitle titleName={'Products'} />
       {data?.products?.map(product => (
         <ProductCard key={product._id} product={product} />
       ))}

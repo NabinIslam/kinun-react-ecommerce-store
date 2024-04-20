@@ -3,12 +3,12 @@ import FeaturedBrands from '../components/FeaturedBrands';
 
 import usePageTitle from '../hooks/usePageTitle';
 import FeaturedProducts from '../components/FeaturedProducts';
+import PageTitle from '../components/PageTitle';
 
 const Home = () => {
-  usePageTitle('E-commerce website');
-
   return (
     <div>
+      <PageTitle titleName={'Home'} />
       {/* <Banner /> */}
       <Hero />
       <FeaturedBrands />

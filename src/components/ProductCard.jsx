@@ -27,16 +27,13 @@ const ProductCard = ({ product }) => {
       product: product._id,
     };
 
-    fetch(
-      'https://kinun-react-ecommerce-server-production.up.railway.app/api/wishlist',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(wishlist),
-      }
-    )
+    fetch('https://kinun.onrender.com/api/wishlist', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(wishlist),
+    })
       .then(res => res.json())
       .then(result => {
         if (result.success) {
@@ -54,16 +51,13 @@ const ProductCard = ({ product }) => {
       product: productId,
       user: { email: user?.email },
     };
-    fetch(
-      `https://kinun-react-ecommerce-server-production.up.railway.app/api/cart/`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(item),
-      }
-    )
+    fetch(`https://kinun.onrender.com/api/cart/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(item),
+    })
       .then(res => res.json())
       .then(result => {
         if (result.success) {

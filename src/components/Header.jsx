@@ -13,9 +13,9 @@ const Header = () => {
   const { data: cart = [] } = useQuery({
     queryKey: ['cart'],
     queryFn: () =>
-      fetch(
-        `https://kinun-react-ecommerce-server-production.up.railway.app/api/cart?user=${user?.email}`
-      ).then(res => res.json()),
+      fetch(`https://kinun.onrender.com/api/cart?user=${user?.email}`).then(
+        res => res.json()
+      ),
     refetchOnMount: true,
   });
 

@@ -4,21 +4,17 @@ import contactImg from '../assets/contact-img.jpg';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import usePageTitle from '../hooks/usePageTitle';
+import PageTitle from '../components/PageTitle';
 
 const Contact = () => {
   const { handleSubmit, register, reset } = useForm();
 
-  usePageTitle('Contact');
-
   const handleContact = data => {
-    fetch(
-      'https://kinun-react-ecommerce-server-production.up.railway.app/api/contacts',
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      }
-    )
+    fetch('https://kinun.onrender.com/api/contacts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
       .then(res => res.json())
       .then(result => {
         if (result.contact) {
@@ -30,6 +26,7 @@ const Contact = () => {
 
   return (
     <div className="py-20">
+      <PageTitle titleName={'Contact'} />
       <h1 className="text-center font-bold text-4xl mb-10">Contact Us</h1>
       <div className="container mx-auto flex flex-col md:flex-row  justify-between md:items-center">
         <div className="basis-full lg:basis-1/2 px-4">

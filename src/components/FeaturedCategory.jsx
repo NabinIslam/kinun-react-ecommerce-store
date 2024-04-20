@@ -11,9 +11,9 @@ const FeaturedCategory = () => {
   } = useQuery({
     queryKey: ['categories'],
     queryFn: () =>
-      fetch(
-        'https://kinun-react-ecommerce-server-production.up.railway.app/api/categories'
-      ).then(res => res.json()),
+      fetch('https://kinun.onrender.com/api/categories').then(res =>
+        res.json()
+      ),
   });
 
   if (isFetching) return <LoadingSpinner />;

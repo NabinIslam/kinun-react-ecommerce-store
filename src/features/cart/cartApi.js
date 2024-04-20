@@ -1,13 +1,10 @@
 export function addToCart(item) {
   return new Promise(async resolve => {
-    const response = await fetch(
-      `https://kinun-react-ecommerce-server-production.up.railway.app/api/cart/`,
-      {
-        method: 'POST',
-        body: JSON.stringify(item),
-        headers: { 'content-type': 'application/json' },
-      }
-    );
+    const response = await fetch(`https://kinun.onrender.com/api/cart/`, {
+      method: 'POST',
+      body: JSON.stringify(item),
+      headers: { 'content-type': 'application/json' },
+    });
     const data = await response.json();
     resolve({ data });
   });
@@ -16,7 +13,7 @@ export function addToCart(item) {
 export function fetchItemsByUser(user) {
   return new Promise(async resolve => {
     const response = await fetch(
-      `https://kinun-react-ecommerce-server-production.up.railway.app/api/cart?user=${user?.email}`
+      `https://kinun.onrender.com/api/cart?user=${user?.email}`
     );
     const data = await response.json();
     resolve({ data });

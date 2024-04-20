@@ -13,9 +13,7 @@ const TopRatedProducts = () => {
   } = useQuery({
     queryKey: 'products',
     queryFn: () =>
-      fetch(
-        'https://kinun-react-ecommerce-server-production.up.railway.app/api/products'
-      ).then(res => res.json()),
+      fetch('https://kinun.onrender.com/api/products').then(res => res.json()),
   });
 
   if (isFetching) return <LoadingSpinner />;

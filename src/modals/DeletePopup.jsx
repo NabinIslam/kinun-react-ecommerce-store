@@ -11,12 +11,9 @@ const DeletePopup = ({
   deletingName,
 }) => {
   const handleDelete = () => {
-    fetch(
-      `https://kinun-react-ecommerce-server-production.up.railway.app/api/${path}/${id}`,
-      {
-        method: 'DELETE',
-      }
-    )
+    fetch(`https://kinun.onrender.com/api/${path}/${id}`, {
+      method: 'DELETE',
+    })
       .then(res => res.json())
       .then(data => {
         if (data.success) {

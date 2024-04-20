@@ -9,12 +9,9 @@ const DeleteProductModal = ({
   refetch,
 }) => {
   const handleDeleteProduct = () => {
-    fetch(
-      `https://kinun-react-ecommerce-server-production.up.railway.app/api/products/${productSlug}`,
-      {
-        method: 'DELETE',
-      }
-    )
+    fetch(`https://kinun.onrender.com/api/products/${productSlug}`, {
+      method: 'DELETE',
+    })
       .then(res => res.json())
       .then(data => {
         if (data.success) {

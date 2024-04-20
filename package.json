@@ -24,6 +24,7 @@
     "react-countup": "^6.5.0",
     "react-dom": "^18.2.0",
     "react-google-button": "^0.7.2",
+    "react-helmet": "^6.1.0",
     "react-hook-form": "^7.41.0",
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.7.1",

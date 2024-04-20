@@ -22,9 +22,9 @@ const UpdateProduct = () => {
   } = useQuery({
     queryKey: [id],
     queryFn: () =>
-      fetch(
-        `https://kinun-react-ecommerce-server-production.up.railway.app/api/products/id/${id}`
-      ).then(res => res.json()),
+      fetch(`https://kinun.onrender.com/api/products/id/${id}`).then(res =>
+        res.json()
+      ),
   });
 
   console.log(product);
@@ -36,9 +36,9 @@ const UpdateProduct = () => {
   } = useQuery({
     queryKey: ['categories'],
     queryFn: () =>
-      fetch(
-        'https://kinun-react-ecommerce-server-production.up.railway.app/api/categories'
-      ).then(res => res.json()),
+      fetch('https://kinun.onrender.com/api/categories').then(res =>
+        res.json()
+      ),
   });
 
   const {
@@ -48,9 +48,7 @@ const UpdateProduct = () => {
   } = useQuery({
     queryKey: ['brands'],
     queryFn: () =>
-      fetch(
-        `https://kinun-react-ecommerce-server-production.up.railway.app/api/brands`
-      ).then(res => res.json()),
+      fetch(`https://kinun.onrender.com/api/brands`).then(res => res.json()),
   });
 
   const handleUpdateProduct = data => {
@@ -66,16 +64,13 @@ const UpdateProduct = () => {
       brand: data.brand,
     };
 
-    fetch(
-      `https://kinun-react-ecommerce-server-production.up.railway.app/api/products/update/${id}`,
-      {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedProduct),
-      }
-    )
+    fetch(`https://kinun.onrender.com/api/products/update/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedProduct),
+    })
       .then(res => res.json())
       .then(data => {
         if (data.success) {

@@ -7,25 +7,57 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
 import { toast } from 'react-hot-toast';
 import usePageTitle from '../hooks/usePageTitle';
+import axios from 'axios';
+import PageTitle from '../components/PageTitle';
 
 const Login = () => {
   const { handleSubmit, register } = useForm();
-  const { signIn, googleSignIn } = useContext(AuthContext);
+  const { googleSignIn } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
-  usePageTitle('Login');
 
   const from = location.state?.from?.pathname || '/';
 
   const handleLogin = data => {
-    signIn(data.email, data.password)
-      .then(() => {
-        navigate(from, { replace: true });
-
-        toast.success('Login successful');
+    axios
+      .post('/api/auth/signin', data)
+      .then(res => {
+        if (res.status === 200) {
+          navigate(from, { replace: true });
+          toast.success('Login successful');
+        } else {
+          toast.error(`couldn't login something went wrong`);
+        }
       })
       .catch(err => console.error(err));
+
+    // fetch(
+    //   'https://kinun.onrender.com/api/auth/signin',
+    //   {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(data),
+    //   }
+    // )
+    //   .then(res => {
+    //     if (res.ok) {
+    //       navigate(from, { replace: true });
+    //       toast.success('Login successful');
+    //     } else {
+    //       toast.error(`couldn't login something went wrong`);
+    //     }
+    //   })
+    //   .catch(err => console.error(err));
   };
+  // signIn(data.email, data.password)
+  //   .then(() => {
+  //     navigate(from, { replace: true });
+
+  //     toast.success('Login successful');
+  //   })
+  //   .catch(err => console.error(err));
 
   const handleGoogleSignIn = () => {
     googleSignIn()
@@ -38,6 +70,7 @@ const Login = () => {
 
   return (
     <div className="h-screen">
+      <PageTitle titleName={'Login'} />
       <div className="container mx-auto py-20 px-4 lg:px-0">
         <h2 className="font-bold text-center text-4xl mb-10 text-transparent bg-clip-text bg-gradient-to-r from-purple-700 to-blue-500 pb-1">
           Login
@@ -49,7 +82,7 @@ const Login = () => {
           >
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="email1" value="Your email" />
+                <Label htmlFor="email" value="Your email" />
               </div>
               <TextInput
                 {...register('email')}
@@ -60,7 +93,7 @@ const Login = () => {
             </div>
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="password1" value="Your password" />
+                <Label htmlFor="password" value="Your password" />
               </div>
               <TextInput
                 {...register('password')}

@@ -5,7 +5,7 @@ function useFetchProducts(categoryQuery = '', brandQuery = '', sortQuery = '') {
     queryKey: [categoryQuery, brandQuery, sortQuery],
     queryFn: () =>
       fetch(
-        `https://kinun-react-ecommerce-server-production.up.railway.app/api/products/?category=${categoryQuery}&brand=${brandQuery}&sort=${sortQuery}`
+        `https://kinun.onrender.com/api/products/?category=${categoryQuery}&brand=${brandQuery}&sort=${sortQuery}`
       ).then(res => res.json()),
   });
 
