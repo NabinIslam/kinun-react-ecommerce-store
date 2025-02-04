@@ -1,8 +1,14 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Kinun | Buy the best",
+};
+
 const HomePage = () => {
   return (
-    <div>
+    <main>
       <h1>This is HomePage component</h1>
-    </div>
+    </main>
   );
 };
 
